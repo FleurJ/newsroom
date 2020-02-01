@@ -1,0 +1,10 @@
+<div>
+  <h1>Articles</h1>
+  <% @articles.each do |a| %>
+    <li>
+      <%= a.title %>
+      <%= a.body %>
+      <%= a.publication_date %>
+    </li>
+  <% end %>
+</div>

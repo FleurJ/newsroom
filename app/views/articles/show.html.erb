@@ -1,0 +1,13 @@
+<div>
+  <h1> <%= @article.title %></h1>
+  <%= @article.publication_date %>
+  <%= @article.user.email %>
+  <%= @article.source_url %>
+  <%= @article.source_name %>
+  <%= @article.body %>
+  <%= button_to "Supprimer",article_path(@article),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" },
+                 :id=>"delete" %>
+</div>
+
