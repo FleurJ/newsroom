@@ -9,7 +9,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
-
+/tmp/*
 !/log/.keep
 !/tmp/.keep
 
@@ -40,4 +40,5 @@ yarn-debug.log*
 *.swp
 .DS_Store
 
-
+!/tmp/pids/
+.env*
