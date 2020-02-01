@@ -20,7 +20,7 @@ class UsersAdministrationController < ApplicationController
   private
 
   def redirect_non_admin
-    redirect_to root_path unless current_user.role === "Admin"
+    redirect_to root_path unless current_user.role === "admin"
   end
 
   def params_user

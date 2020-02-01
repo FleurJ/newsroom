@@ -5,11 +5,11 @@
     <%= f.input :first_name, label: "Prénom" %>
     <%= f.input :name, label: "Nom:" %>
     <%= f.input :agora_profil, label: "Profil Agora:" %>
-    <%= f.input :status, label: 'Statut', collection: ['Actif', 'Inactif'] %>
-    <%= f.input :role, label: 'Role', collection: ['User', 'Editor', 'Admin'] %>
+    <%= f.input :status, label: 'Statut', collection: ['actif', 'inactif'] %>
+    <%= f.input :role, label: 'Rôle', collection: ['user', 'editor', 'admin'] %>
 
     <button type="button" class="btn btn-outline-primary">
-      <%= f.button :submit, value: 'Update', "data-disable-with" => "Updating.." %>
+      <%= f.button :submit, value: 'Enregistrer', "data-disable-with" => "Enregistrement..." %>
     </button>
   <% end %>
 </div>

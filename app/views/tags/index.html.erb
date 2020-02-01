@@ -1,0 +1,18 @@
+<h1>Thématiques</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <% @tags.each do |tag| %>
+      <div class="btn-tag">
+        <%= tag.name %>
+      </div>
+      <%= link_to "modifier", edit_tag_path(tag) %>
+      <%= link_to "supprimer", tag_path(tag),
+                  method: :delete,
+                  data: { confirm: "Veuillez confirmer la suppresion !" },
+                  :id=>"delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
