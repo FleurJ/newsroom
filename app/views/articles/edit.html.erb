@@ -1,0 +1,13 @@
+<div>
+  <h1>Modifier l'article</h1>
+    <%= simple_form_for @article do |a| %>
+    <%= a.input :title %>
+    <%= a.input :body %>
+    <%= a.input :source_name %>
+    <%= a.input :source_url %>
+    <%= a.input :publication_date %>
+    <%= a.input :status, label: 'Status', collection: ['draft', 'published'], default: 'draft' %>
+    <%= a.submit "Sauvegarder" %>
+  <% end %>
+</div>
+
