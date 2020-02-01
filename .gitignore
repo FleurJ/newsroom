@@ -40,4 +40,4 @@ yarn-debug.log*
 *.swp
 .DS_Store
 
-/tmp/pids/server.pid
+
