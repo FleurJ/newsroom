@@ -1,0 +1,11 @@
+<div>
+  <h1>Créer article</h1>
+  <%= simple_form_for @article, url: articles_path do |a| %>
+    <%= a.input :title %>
+    <%= a.input :body %>
+    <%= a.input :source_name %>
+    <%= a.input :source_url %>
+    <%= a.input :publication_date %>
+    <%= a.submit "Créer" %>
+  <% end %>
+</div>
