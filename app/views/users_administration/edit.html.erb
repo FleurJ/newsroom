@@ -1,0 +1,15 @@
+<h2>User edit: </h2>
+
+<div class="form">
+  <%= simple_form_for @user, url: users_administration_path, method: :patch do |f| %>
+    <%= f.input :first_name, label: "Prénom" %>
+    <%= f.input :name, label: "Nom:" %>
+    <%= f.input :agora_profil, label: "Profil Agora:" %>
+    <%= f.input :status, label: 'Statut', collection: ['Actif', 'Inactif'] %>
+    <%= f.input :role, label: 'Role', collection: ['User', 'Editor', 'Admin'] %>
+
+    <button type="button" class="btn btn-outline-primary">
+      <%= f.button :submit, value: 'Update', "data-disable-with" => "Updating.." %>
+    </button>
+  <% end %>
+</div>
