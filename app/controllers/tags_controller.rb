@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :find_tag, only: %i[:update, :edit]
+  before_action :find_tag, only: [:update, :edit]
   def index
     if authorised_user
       @tags = Tag.all
@@ -28,7 +28,7 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    @tag.destro if authorised_user
+    @tag.destroy if authorised_user
     redirect_to tags_path
   end
 

@@ -7,7 +7,7 @@
   <%= @article.body %>
   <%= button_to "Supprimer",article_path(@article),
                   method: :delete,
-                  data: { confirm: "Are you sure?" },
+                  data: { confirm: "Veuillez confirmer la suppresion !" },
                  :id=>"delete" %>
 </div>
 
