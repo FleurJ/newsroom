@@ -1,0 +1,6 @@
+<h2>Users index</h2>
+
+<% @users.each do |user| %>
+  <%= link_to user.email, edit_users_administration_path(user) %>
+  <br>
+<% end %>
