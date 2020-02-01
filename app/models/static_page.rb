@@ -1,4 +1,4 @@
-class Page < ApplicationRecord
+class StaticPage < ApplicationRecord
   ALLOWED_STATUSES = %w[draft published].freeze
 
   belongs_to :user
