@@ -1,1 +1,13 @@
-<h1> title</h1>
+<h1>Thématiques</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <% @tags.each do |tag| %>
+      <div class="btn-tag">
+        <%= tag.name %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
