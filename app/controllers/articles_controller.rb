@@ -7,8 +7,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = current_user
-    @article.status = 'draft'
+    set_user_status
+    process_belga_file
     @article.save!
     redirect_to articles_path
   end
@@ -42,4 +42,18 @@ class ArticlesController < ApplicationController
   def check_article
     @article = Article.find(params[:id])
   end
+
+  def process_belga_file
+    if @article.file.empty?
+      scrap_title(Article.belga_file)
+      scrap_body(Article.belga_file)
+      fill_fields
+    end
+  end
+
+  def set_user_status
+    @article.user = current_user
+    @article.status = 'draft'
+  end
+
 end
