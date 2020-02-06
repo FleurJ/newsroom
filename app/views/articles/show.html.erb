@@ -4,7 +4,10 @@
   <%= @article.user.email %>
   <%= @article.source_url %>
   <%= @article.source_name %>
-  <%= @article.body %>
+  <%= @article.body %> <br>
+  <% @tags.each do |t| %>
+    <%= t.name %>
+  <% end %>
   <%= button_to "Supprimer",article_path(@article),
                   method: :delete,
                   data: { confirm: "Veuillez confirmer la suppresion !" },

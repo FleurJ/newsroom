@@ -3,6 +3,7 @@
 <div class="container">
     <%= simple_form_for @tag, url: tags_path do |a| %>
     <%= a.input :name %>
+    <%= a.input :status, label: 'Status', collection: ['draft', 'published'], default: 'draft' %>
     <%= a.submit "Créer" %>
   <% end %>
 </div>
