@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @tags = Tag.all
   end
 
   def create
@@ -14,6 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    @tags = Tag.all
   end
 
   def update
@@ -27,6 +29,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @tags = @article.tags
   end
 
   def index
@@ -36,7 +39,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :teaser)
+    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :teaser, tag_ids: [])
   end
 
   def check_article
