@@ -1,15 +1,22 @@
-<h2>User edit: </h2>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Mise à jour de l'utilisateur
+    </div>
+    <div class="card-body">
+      <div class="form">
+        <%= simple_form_for @user, url: users_administration_path, method: :patch do |f| %>
+          <%= f.input :first_name, label: "Prénom" %>
+          <%= f.input :name, label: "Nom:" %>
+          <%= f.input :agora_profil, label: "Profil Agora:" %>
+          <%= f.input :status, label: 'Statut', collection: ['actif', 'inactif'] %>
+          <%= f.input :role, label: 'Rôle', collection: ['user', 'editor', 'admin'] %>
 
-<div class="form">
-  <%= simple_form_for @user, url: users_administration_path, method: :patch do |f| %>
-    <%= f.input :first_name, label: "Prénom" %>
-    <%= f.input :name, label: "Nom:" %>
-    <%= f.input :agora_profil, label: "Profil Agora:" %>
-    <%= f.input :status, label: 'Statut', collection: ['actif', 'inactif'] %>
-    <%= f.input :role, label: 'Rôle', collection: ['user', 'editor', 'admin'] %>
-
-    <button type="button" class="btn btn-outline-primary">
-      <%= f.button :submit, value: 'Enregistrer', "data-disable-with" => "Enregistrement..." %>
-    </button>
-  <% end %>
+          <%= f.button :submit, value: 'Enregistrer', "data-disable-with" => "Enregistrement...", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
 </div>
+</div>
+
+
