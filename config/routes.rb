@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :users_administration
-  resources :tags, only: [:edit, :new, :destroy, :index, :create]
+
+  resources :tags
 end

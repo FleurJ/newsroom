@@ -7,6 +7,7 @@
     <%= a.input :source_url %>
     <%= a.input :publication_date %>
     <%= a.input :status, label: 'Status', collection: ['draft', 'published'], default: 'draft' %>
+    <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true} %>
     <%= a.submit "Sauvegarder" %>
   <% end %>
 </div>
