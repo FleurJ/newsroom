@@ -44,16 +44,11 @@ class ArticlesController < ApplicationController
   end
 
   def process_belga_file
-    if @article.file.empty?
-      scrap_title(Article.belga_file)
-      scrap_body(Article.belga_file)
-      fill_fields
-    end
+    @article = BelgaScrapping.new.scrap_article(params[:article][:belga_file].tempfile, @article)
   end
 
   def set_user_status
     @article.user = current_user
     @article.status = 'draft'
   end
-
 end

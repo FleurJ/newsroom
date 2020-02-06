@@ -12,7 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+/tmp/cache/*
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
@@ -40,5 +40,5 @@ yarn-debug.log*
 *.swp
 .DS_Store
 
-!/tmp/pids/
+!/tmp/pids/*
 .env*
