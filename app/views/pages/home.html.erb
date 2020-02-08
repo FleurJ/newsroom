@@ -1,13 +1,7 @@
 <div class="container">
   <% if current_user %>
     <h1>Bienvenue <%= current_user.email %>!</h1>
-    <div class="row">
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Chercher article" aria-label="Search">
-        <button class="btn btn-secondary" type="submit">Chercher</button>
-      </form>
-    </div>
-    <br>
+      <p><%=  link_to 'Rechercher un article', "#", class:"btn btn-primary" %></p>
       <p><%= link_to 'Revues de presse', articles_path, class:"btn btn-primary" %></p>
       <p><%= link_to 'Thématiques', tags_path, class:"btn btn-primary"%> </p>
       <p><%= link_to 'Ajouter un article', new_article_path, class:"btn btn-primary" %></p>
