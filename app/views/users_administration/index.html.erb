@@ -1,12 +1,21 @@
 <div class="container">
   <div class="card">
-    <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <%= link_to " Créer un utilisateur", new_users_administration_path, class: 'nav-link far fa-plus-square'  %>
+      </li>
+    </ul>
+  <div class="card-header">
       Gestion des utilisateurs
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">
-        <% @users.each do |user| %>
-          <%= link_to user.email, edit_users_administration_path(user) %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <% @users.each do |user| %>
+          <% if user.name %>
+            <%= link_to "#{user.first_name} #{user.name}", edit_users_administration_path(user) %>
+          <% else %>
+            <%= link_to user.email, edit_users_administration_path(user) %>
+          <% end %>
           <br>
         <% end %>
       </h5>
