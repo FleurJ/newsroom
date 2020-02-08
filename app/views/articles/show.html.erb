@@ -8,9 +8,7 @@
       <div class="card-body">
         <p><%= @article.body %></p>
         <% @tags.each do |t| %>
-        <li>
           <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
-        </li>
       <% end %>
       </div>
       <div class="card-footer text-muted">
