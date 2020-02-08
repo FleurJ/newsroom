@@ -35,7 +35,7 @@ class GopressScrapping
   end
 
   def scrap_body(element)
-    return element.search('p').text
+    return element.search('p')
   end
 
   # def nokogiri_file(file)
