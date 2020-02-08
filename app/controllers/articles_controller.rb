@@ -27,6 +27,10 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
+  def search
+    @blabla = "yoloooooooooooooooooo"
+  end
+
   def show
     @tags = @article.tags
   end
