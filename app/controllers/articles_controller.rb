@@ -34,12 +34,16 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:query].present?
-      sql_query = " \
-        articles.title @@ :query \
-      "
-      @articles = Article.where(sql_query, query: "%#{params[:query]}%")
+      date_start = params[:query]
     else
-      @articles = Article.all
+      date_start = DateTime.now.strftime("%Y-%m-%d")
+    end
+    articles = Article.all
+    @articles = []
+    articles.each do |a|
+      if a.created_at.strftime("%Y-%m-%d") == date_start
+        @articles << a
+      end
     end
   end
 

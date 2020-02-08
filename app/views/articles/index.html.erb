@@ -1,8 +1,8 @@
 <div class="container">
-  <h1>Revue de presse</h1>
+  <h1>Revue de presse <%= DateTime.now.to_date %></h1>
     <form class="form-inline">
-      <%= form_tag articles_path, method: :get do %>
-      <%= text_field_tag :query,
+      <%= simple_form_for articles_path, method: :get do |f| %>
+      <%= date_field_tag :query,
         params[:query],
         class: "form-control",
         placeholder: "Chercher un article"
@@ -16,6 +16,8 @@
     <li>
       <%= link_to a.title, article_path(a)%>
       <%= a.publication_date %>
+      ___
+      <%= a.created_at %>
     </li>
   <% end %>
 </div>
