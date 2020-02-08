@@ -6,11 +6,9 @@
         <p><%= @article.source_url.html_safe %> <%= @article.source_name %> <%= @article.publication_date %> </p>
       </div>
       <div class="card-body">
-        <p><%= @article.body %></p>
+        <p><%= @article.body.html_safe %></p>
         <% @tags.each do |t| %>
-        <li>
           <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
-        </li>
       <% end %>
       </div>
       <div class="card-footer text-muted">
