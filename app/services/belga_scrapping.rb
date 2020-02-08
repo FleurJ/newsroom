@@ -2,13 +2,13 @@ require 'open-uri'
 require 'nokogiri'
 
 class BelgaScrapping
-  def scrap_article(file, article)
-    @article = article
-    @article.title = scrap_title(file)
-    @article.body = scrap_body(file)
-    @article.source_name = "Belga"
-    @article.publication_date = Date.today.to_s
-    @article
+  def scrap_article(file, params)
+    params.merge(
+      title: scrap_title(file),
+      body: scrap_body(file),
+      source_name: "Belga",
+      publication_date: Date.today
+    )
   end
 
   def scrap_title(file)
@@ -28,5 +28,4 @@ class BelgaScrapping
     end
     return body.join.split('Keywords:')[0]
   end
-
 end
