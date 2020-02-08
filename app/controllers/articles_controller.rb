@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @blabla = "yoloooooooooooooooooo"
+
   end
 
   def show
