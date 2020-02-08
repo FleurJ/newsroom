@@ -33,7 +33,14 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.all
+    if params[:query].present?
+      sql_query = " \
+        articles.title @@ :query \
+      "
+      @articles = Article.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @articles = Article.all
+    end
   end
 
   private

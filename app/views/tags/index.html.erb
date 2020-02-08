@@ -1,18 +1,21 @@
-<h1>Thématiques</h1>
-
 <div class="container">
+  <h1>Thématiques</h1>
   <div class="row">
     <div class="col-12">
       <% @tags.each do |tag| %>
       <div class="btn-tag">
         <%= tag.name %>
       </div>
-      <%= link_to "modifier", edit_tag_path(tag) %>
-      <%= link_to "supprimer", tag_path(tag),
+      <%= link_to "Modifier", edit_tag_path(tag), class:"btn btn-primary" %>
+      <%= link_to "Supprimer", tag_path(tag),
                   method: :delete,
-                  data: { confirm: "Veuillez confirmer la suppresion !" },
-                  :id=>"delete" %>
+                  data: { confirm: "Veuillez confirmer la suppression !" },
+                  :id=>"delete", class:"btn btn-secondary" %>
       <% end %>
     </div>
   </div>
+  <br>
+  <% if current_user.role == 'admin' %>
+      <%= link_to "Créer nouvelle thématique", new_tag_path%>
+  <% end %>
 </div>

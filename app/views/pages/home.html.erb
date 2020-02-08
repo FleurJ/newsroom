@@ -1,7 +1,19 @@
-<% if current_user %>
-  <h2>You are logged</h2>
-<% else %>
-  <h2>Home page</h2>
-  <p><%= link_to 'Sign in', new_user_session_path  %></p>
-  <p><%= link_to 'Sign up', new_user_registration_path %></p>
-<% end %>
+<div class="container">
+  <% if current_user %>
+    <h1>Bienvenue <%= current_user.email %>!</h1>
+    <div class="row">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Chercher article" aria-label="Search">
+        <button class="btn btn-secondary" type="submit">Chercher</button>
+      </form>
+    </div>
+    <br>
+      <p><%= link_to 'Revues de presse', articles_path, class:"btn btn-primary" %></p>
+      <p><%= link_to 'Thématiques', tags_path, class:"btn btn-primary"%> </p>
+      <p><%= link_to 'Ajouter un article', new_article_path, class:"btn btn-primary" %></p>
+  <% else %>
+    <h1>Page d'accueil</h1>
+    <%= link_to 'Se connecter', new_user_session_path  %>
+    <%= link_to 'Créer un compte', new_user_registration_path %>
+  <% end %>
+</div>

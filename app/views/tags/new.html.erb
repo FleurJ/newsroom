@@ -1,9 +1,8 @@
-<h1>Créer un nouveau tag</h1>
-
 <div class="container">
+  <h1>Créer un nouveau tag</h1>
     <%= simple_form_for @tag, url: tags_path do |a| %>
-    <%= a.input :name %>
-    <%= a.input :status, label: 'Status', collection: ['draft', 'published'], default: 'draft' %>
+    <%= a.input :name, label: 'Nom' %>
+    <%= a.input :status, label: 'Statut', collection: ['draft', 'published'], default: 'draft' %>
     <%= a.submit "Créer" %>
   <% end %>
 </div>
