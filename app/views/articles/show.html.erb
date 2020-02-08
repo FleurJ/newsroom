@@ -1,21 +1,28 @@
 <div class="container">
-  <h1> <%= @article.title %></h1>
-  <p><%= @article.created_at %> by <%= @article.user.email %></p>
-  <p><%= @article.body %></p>
-  <p><%= @article.source_url %> <%= @article.source_name %> <%= @article.publication_date %></p>
-  <% @tags.each do |t| %>
-    <li>
-      <%= t.name %>
-    </li>
-  <% end %>
-  <br>
   <div class="row">
-    <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %>
-  <%= button_to "Supprimer", article_path(@article),
-                  method: :delete,
-                  data: { confirm: "Veuillez confirmer la suppresion !" },
-                 :id=>"delete", class:"btn btn-primary" %>
+    <div class="card">
+      <div class="card-header">
+        <h1> <%= @article.title %></h1>
+        <p><%= @article.source_url.html_safe %> <%= @article.source_name %> <%= @article.publication_date %> </p>
+      </div>
+      <div class="card-body">
+        <p><%= @article.body %></p>
+        <% @tags.each do |t| %>
+        <li>
+          <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
+        </li>
+      <% end %>
+      </div>
+      <div class="card-footer text-muted">
+        <p><%= @article.created_at %> by <%= @article.user.first_name %> <%=@article.user.name %></p>
+      </div>
+    </div>
+    <div class="row">
+      <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %>
+      <%= button_to "Supprimer", article_path(@article),
+                      method: :delete,
+                      data: { confirm: "Veuillez confirmer la suppresion !" },
+                     :id=>"delete", class:"btn btn-primary" %>
+    </div>
   </div>
-
 </div>
-
