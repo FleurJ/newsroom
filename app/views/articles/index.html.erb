@@ -1,8 +1,20 @@
-<div>
-  <h1>Articles</h1>
+<div class="container">
+  <h1>Revue de presse</h1>
+    <form class="form-inline">
+      <%= form_tag articles_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Chercher un article"
+      %>
+      <%= submit_tag "Chercher", class: "btn btn-secondary" %>
+      <% end %>
+    </form>
+  <br>
+  <h2>Articles</h2>
   <% @articles.each do |a| %>
     <li>
-      <%= a.title %>
+      <%= link_to a.title, article_path(a)%>
       <%= a.publication_date %>
     </li>
   <% end %>

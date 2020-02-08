@@ -1,6 +1,5 @@
-<h1>Modifier "<%= @tag.name %>"</h1>
-
 <div class="container">
+  <h1>Modifier "<%= @tag.name %>"</h1>
     <%= simple_form_for @tag do |a| %>
     <%= a.input :name %>
     <%= a.submit "Enregistrer" %>
