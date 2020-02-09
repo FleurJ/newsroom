@@ -1,14 +1,22 @@
 <div class="container">
   <div class="row">
     <% if current_user %>
-    <div class="card mb-3 text-center mx-auto" style="width: 18rem;">
+    <div class="card mb-3 text-center mx-auto" style="width: 24rem;">
       <div class="card-body">
         <h5 class="card-title">Bonjour <%= current_user.first_name %></i></h5>
         <p class="card-text">
-          <p><%= link_to 'Revues de presse', articles_path, class:"btn btn-primary" %></p>
-          <p><%= link_to 'Trouver un article', "#", class:"btn btn-primary" %></p>
-          <p><%= link_to 'Thématiques', tags_path, class:"btn btn-primary"%> </p>
-          <p><%= link_to 'Ajouter un article', new_article_path, class:"btn btn-primary" %></p>
+          <%= link_to articles_path, class: "btn btn-primary btn-lg btn-block home", title:'Revues de presse' do %>
+          <i class="fas fa-newspaper fa-fw"></i> Revues de presse
+          <% end %>
+          <%= link_to tags_path, class: "btn btn-primary btn-lg btn-block home", title:'Thématiques' do %>
+          <i class="fas fa-tags fa-fw"></i> Thématiques
+          <% end %>
+          <%= link_to "#", class: "btn btn-primary btn-lg btn-block home", title:'Trouver un article' do %>
+          <i class="fas fa-search fa-fw"></i> Trouver un article
+          <% end %>
+          <%= link_to new_article_path, class: "btn btn-primary btn-lg btn-block home", title:'Ajouter un article' do %>
+          <i class="fas fa-file-medical fa-fw"></i> Ajouter un article
+          <% end %>
         </p>
       </div>
   </div>
