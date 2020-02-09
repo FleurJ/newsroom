@@ -1,12 +1,21 @@
 <div class="container">
-  <% if current_user %>
-    <h1>Bienvenue <%= current_user.email %>!</h1>
-      <p><%=  link_to 'Rechercher un article', "#", class:"btn btn-primary" %></p>
-      <p><%= link_to 'Revues de presse', articles_path, class:"btn btn-primary" %></p>
-      <p><%= link_to 'Thématiques', tags_path, class:"btn btn-primary"%> </p>
-      <p><%= link_to 'Ajouter un article', new_article_path, class:"btn btn-primary" %></p>
+  <div class="row">
+    <% if current_user %>
+    <div class="card mb-3 text-center mx-auto" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Bonjour <%= current_user.first_name %></i></h5>
+        <p class="card-text">
+          <p><%= link_to 'Revues de presse', articles_path, class:"btn btn-primary" %></p>
+          <p><%= link_to 'Trouver un article', "#", class:"btn btn-primary" %></p>
+          <p><%= link_to 'Thématiques', tags_path, class:"btn btn-primary"%> </p>
+          <p><%= link_to 'Ajouter un article', new_article_path, class:"btn btn-primary" %></p>
+        </p>
+      </div>
+  </div>
   <% else %>
     <h1>Page d'accueil</h1>
     <%= link_to 'Se connecter', new_user_session_path  %>
   <% end %>
+  </div>
+
 </div>
