@@ -43,7 +43,9 @@ class ArticlesController < ApplicationController
       if a.created_at.strftime("%Y-%m-%d") == date_start
         @articles << a
       end
+      @tags = a.tags
     end
+
   end
 
   private
