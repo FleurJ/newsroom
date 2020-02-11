@@ -2,6 +2,7 @@ class Tag < ApplicationRecord
   ALLOWED_STATUSES = %w[draft published].freeze
 
   has_many :articles, through: :article_tags
+  has_many :article_tags, dependent: :destroy
 
   validates :name, presence: true
   validates :status, presence: true, inclusion: { in: ALLOWED_STATUSES,
