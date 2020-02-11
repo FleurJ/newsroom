@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Revue de presse <%= DateTime.now.to_date %></h1>
+  <h1>Revue de presse <%= @date %></h1>
     <form class="form-inline">
       <%= simple_form_for articles_path, method: :get do |f| %>
       <%= date_field_tag :query,
@@ -15,9 +15,7 @@
   <% @articles.each do |a| %>
     <li>
       <%= link_to a.title, article_path(a)%>
-      <%= a.publication_date %>
-      ___
-      <%= a.created_at %>
+      <%= "- Date de publication: #{a.publication_date.strftime("%d/%m/%Y")}" %>
     </li>
   <% end %>
 </div>
