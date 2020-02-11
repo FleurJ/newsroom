@@ -40,9 +40,7 @@ class ArticlesController < ApplicationController
     articles = Article.all
     @articles = []
     articles.each do |a|
-      if a.created_at.strftime("%Y-%m-%d") == date_start
-        @articles << a
-      end
+      @articles << a if a.created_at.strftime("%Y-%m-%d") == date_start
     end
   end
 

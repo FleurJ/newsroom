@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Revue de presse <%= DateTime.now.to_date %></h1>
+  <h1>Revue de presse du <%= DateTime.now.strftime("%d.%d.%Y") %></h1>
     <form class="form-inline">
       <%= simple_form_for articles_path, method: :get do |f| %>
       <%= date_field_tag :query,
@@ -7,17 +7,27 @@
         class: "form-control",
         placeholder: "Chercher un article"
       %>
-      <%= submit_tag "Chercher", class: "btn btn-secondary" %>
+      <%= submit_tag "OK", class: "btn btn-secondary" %>
       <% end %>
     </form>
   <br>
-  <h2>Articles</h2>
-  <% @articles.each do |a| %>
-    <li>
-      <%= link_to a.title, article_path(a)%>
-      <%= a.publication_date %>
-      ___
-      <%= a.created_at %>
-    </li>
+  <% @articles.each do |article| %>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <!-- <img src="https://image.shutterstock.com/z/stock-vector-speech-bubble-icon-over-blue-circle-and-background-colorful-design-vector-illustration-574733059.jpg" class="card-img" alt="article illustration"> -->
+        <% article.tags.each do |t| %>
+              <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
+          <% end %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
+         <!--  <p class="card-text"></p> -->
+          <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date %></small></p>
+        </div>
+      </div>
+      </div>
+    </div>
   <% end %>
 </div>
