@@ -1,5 +1,19 @@
 class ArticlesController < ApplicationController
   before_action :check_article, only: [:edit, :update, :show, :destroy]
+  FRENCH_MONTHS = {
+    "01": "janvier",
+    "02": "février",
+    "03": "mars",
+    "04": "avril",
+    "05": "mai",
+    "06": "juin",
+    "07": "juillet",
+    "08": "août",
+    "09": "septembre",
+    "10": "octobre",
+    "11": "novembre",
+    "12": "décembre"
+  }
 
   def new
     @article = Article.new
@@ -33,14 +47,18 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:query].present?
-      date_start = params[:query]
+      date_start = Date.parse params[:query]
+      @date = date_start.strftime("%d") + " " + FRENCH_MONTHS[date_start.strftime("%m").to_sym] + " " + date_start.strftime("%Y")
     else
       date_start = DateTime.now.strftime("%Y-%m-%d")
+      @date = DateTime.now.strftime("%d") + " " + FRENCH_MONTHS[DateTime.now.strftime("%m").to_sym] + " " + DateTime.now.strftime("%Y")
     end
     articles = Article.all
     @articles = []
     articles.each do |a|
-      @articles << a if a.created_at.strftime("%Y-%m-%d") == date_start
+      if a.press_review_date == date_start
+        @articles << a
+      end
     end
   end
 
@@ -59,7 +77,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :teaser, tag_ids: [])
+    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :press_review_date  ,:teaser, tag_ids: [])
   end
 
   def belga_article_params

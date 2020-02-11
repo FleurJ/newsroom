@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Revue de presse du <%= DateTime.now.strftime("%d.%d.%Y") %></h1>
+  <h1>Revue de presse <%= @date %></h1>
     <form class="form-inline">
       <%= simple_form_for articles_path, method: :get do |f| %>
       <%= date_field_tag :query,
