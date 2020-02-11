@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :find_tag, only: [:update, :edit]
+  before_action :find_tag, only: [:update, :edit, :destroy]
   def index
     if authorised_user
       @tags = Tag.all
