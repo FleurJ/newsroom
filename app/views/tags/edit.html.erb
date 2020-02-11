@@ -1,7 +1,8 @@
 <div class="container">
   <h1>Modifier "<%= @tag.name %>"</h1>
     <%= simple_form_for @tag do |a| %>
-    <%= a.input :name %>
+    <%= a.input :name, label: 'Nom' %>
+    <%= a.input :status, label: 'Statut', collection: ['draft', 'published'], default: 'draft' %>
     <%= a.submit "Enregistrer" %>
   <% end %>
 </div>
