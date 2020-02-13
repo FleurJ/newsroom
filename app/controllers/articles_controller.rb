@@ -15,6 +15,16 @@ class ArticlesController < ApplicationController
     "12": "décembre"
   }
 
+  def draft
+    articles = Article.all
+    @articles = []
+    articles.each do |a|
+      if current_user == a.user
+        @articles << a if a.status == 'draft'
+      end
+    end
+  end
+
   def new
     @article = Article.new
     @tags = Tag.all
@@ -24,7 +34,7 @@ class ArticlesController < ApplicationController
     articles_generation_params.each do |item|
       Article.create(item.merge(user: current_user, status: 'draft'))
     end
-    redirect_to articles_path
+    redirect_to draft_path
   end
 
   def edit
@@ -56,9 +66,9 @@ class ArticlesController < ApplicationController
     articles = Article.all
     @articles = []
     articles.each do |a|
-      if a.press_review_date == date_start
-        @articles << a
-      end
+    if a.press_review_date == date_start
+      @articles << a
+    end
     end
   end
 
