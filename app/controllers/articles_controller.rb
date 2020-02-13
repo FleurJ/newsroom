@@ -77,7 +77,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :press_review_date  ,:teaser, tag_ids: [])
+    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :press_review_date, :teaser, :article_type, tag_ids: [])
   end
 
   def belga_article_params
