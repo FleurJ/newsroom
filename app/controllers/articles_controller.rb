@@ -22,7 +22,10 @@ class ArticlesController < ApplicationController
 
   def create
     articles_generation_params.each do |item|
-      Article.create(item.merge(user: current_user, status: 'draft'))
+      pub_date = adapt_publication_date_scrapping(item[:publication_date])
+      a = Article.create(item.merge(user: current_user, status: 'draft'))
+      a.publication_date = pub_date
+      a.save
     end
     redirect_to articles_path
   end
@@ -56,13 +59,40 @@ class ArticlesController < ApplicationController
     articles = Article.all
     @articles = []
     articles.each do |a|
-      if a.press_review_date == date_start
+        if a.press_review_date == date_start
         @articles << a
       end
     end
   end
 
   private
+
+  def adapt_publication_date_scrapping(item)
+    my_hash = {
+      'jan' => '01',
+      'fév' => '02',
+      'mar' => '03',
+      'avr' => '04',
+      'mai' => '05',
+      'jui' => '06',
+      'juil'=> '07',
+      'aoû' => '08',
+      'sep' => '09',
+      'oct' => '10',
+      'nov' => '11',
+      'dec' => '12'
+    }
+
+    x = item.gsub('.', '')
+    x = x.split(' ')
+    x.shift
+    day = x[0]
+    month = my_hash[x[1]]
+    year = x[2]
+    publication_date = "#{year}-#{month}-#{day}".to_date
+
+    return publication_date
+  end
 
   def check_article
     @article = Article.find(params[:id])

@@ -8,7 +8,6 @@
       <%= a.input :body %>
       <%= a.input :source_name %>
       <%= a.input :source_url %>
-      <%= a.input :publication_date %>
       <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true} %>
       <%= a.submit "Créer" %>
     <% end %>
