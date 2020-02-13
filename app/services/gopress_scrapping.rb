@@ -11,7 +11,8 @@ class GopressScrapping
         body: scrap_body(element),
         source_name: scrap_source(element),
         publication_date: scrap_date(element),
-        source_url: scrap_sourcepdf(element)
+        source_url: scrap_sourcepdf(element),
+        article_type: "presse"
       )
     end
   end

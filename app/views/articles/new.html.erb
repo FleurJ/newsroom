@@ -9,6 +9,7 @@
       <%= a.input :source_name, label: 'Nom de la source' %>
       <%= a.input :source_url, label: 'Addresse de la source' %>
       <%= a.input :publication_date, label: 'Date de publication' %>
+      <%= a.input :article_type, label: "Type d'article", collection: ['belga', 'presse', 'web'] %>
       <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true}, label: 'Thématiques' %>
       <%= a.submit "Créer" %>
     <% end %>
