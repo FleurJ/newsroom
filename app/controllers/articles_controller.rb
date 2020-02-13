@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :check_article, only: [:edit, :update, :show, :destroy]
+  before_action :autodate, only: [:index]
   FRENCH_MONTHS = {
     "01": "janvier",
     "02": "février",
@@ -16,7 +17,7 @@ class ArticlesController < ApplicationController
   }
 
   def draft
-    articles = Article.all
+    articles = Article.all.sort
     @articles = []
     articles.each do |a|
       if current_user == a.user
@@ -63,16 +64,20 @@ class ArticlesController < ApplicationController
       date_start = DateTime.now.strftime("%Y-%m-%d")
       @date = DateTime.now.strftime("%d") + " " + FRENCH_MONTHS[DateTime.now.strftime("%m").to_sym] + " " + DateTime.now.strftime("%Y")
     end
-    articles = Article.all
+    articles = Article.all.sort
     @articles = []
     articles.each do |a|
-    if a.press_review_date == date_start
-      @articles << a
-    end
+      if a.press_review_date == date_start && a.status == 'published'
+        @articles << a
+      end
     end
   end
 
   private
+
+  def autodate
+    params[:query] = DateTime.now.strftime("%Y-%m-%d") if params[:query].nil?
+  end
 
   def check_article
     @article = Article.find(params[:id])
