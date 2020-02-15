@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 
   def show
     @articles = []
-    articles = @tag.articles
+    articles = @tag.articles.sort_by(&:created_at).reverse!
     articles.each do |a|
       @articles << a if a.status == 'published'
     end

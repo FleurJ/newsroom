@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
   }
 
   def draft
-    articles = Article.all.sort
+    articles = Article.all.sort_by(&:created_at).reverse!
     @articles = []
     articles.each do |a|
       if current_user == a.user
@@ -75,13 +75,7 @@ class ArticlesController < ApplicationController
       date_start = DateTime.now.strftime("%Y-%m-%d")
       @date = DateTime.now.strftime("%d") + " " + FRENCH_MONTHS[DateTime.now.strftime("%m").to_sym] + " " + DateTime.now.strftime("%Y")
     end
-    articles = Article.all.sort
-    @articles = []
-    articles.each do |a|
-      if a.press_review_date == date_start && a.status == 'published'
-        @articles << a
-      end
-    end
+    @articles = Article.all.published.sort_by(&:created_at).reverse!
   end
 
   private
@@ -143,7 +137,9 @@ class ArticlesController < ApplicationController
 
   def articles_generation_params
     return gopress_article_params if gopress_file.present?
+
     return [belga_article_params] if belga_file.present?
+
     return [article_params]
   end
 end
