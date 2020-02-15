@@ -1,13 +1,28 @@
 <div class="container">
-  <h1>Revue de presse <%= @date %></h1>
-  <%= form_tag search_path, method: :get do %>
-  <%= text_field_tag :keywords,
-    params[:keywords],
-    class: "form-control",
-    placeholder: "mots-clés"
-  %>
-  <%= submit_tag "Trouver", class: "btn btn-primary" %>
-<% end %>
+  <h1>Trouver un article</h1>
+  <!-- CHAMPS DE RECHERCHE -->
+  <form class="form-inline">
+    <%= simple_form_for search_path, method: :get do |f| %>
+    <%= label_tag "Entre le" %>
+      <%= date_field_tag :start_date,
+        params[:start_date],
+        class: "form-control",
+        label: "Date"
+      %>
+      <%= label_tag " et le" %>
+      <%= date_field_tag :end_date,
+        params[:end_date],
+        class: "form-control"
+      %>
+      <%= text_field_tag :keywords,
+        params[:keywords],
+        class: "form-control",
+        placeholder: "mots-clés" %>
+      <%= submit_tag "Trouver", class: "btn btn-secondary" %>
+    <% end %>
+  </form>
+    <!-- fin champs de recherche -->
+
 
   <br>
   <% if @articles.empty? %>

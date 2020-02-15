@@ -27,17 +27,9 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = []
-    if params[:keywords].present?
-      sql_keywords = " \
-            articles.title @@ :keywords \
-            OR articles.body @@ :keywords \
-          "
-      @articles = Article.where(sql_keywords, keywords: "%#{params[:keywords]}%")
-      @articles.each do |a|
-        @articles << a if a.status == 'published'
-      end
-    end
+    @articles = Article
+    @articles = @articles.by_keywords(params[:keywords]) if params[:keywords].present?
+    @articles = @articles.published_between(params[:start_date], params[:end_date]).published
   end
 
   def new
