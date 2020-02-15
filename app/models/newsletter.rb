@@ -5,7 +5,7 @@ class Newsletter < ApplicationRecord
   has_many :newsletter_article
   has_many :articles, through: :newsletter_article
 
-  validates :type, presence: true
+  validates :newsletter_type, presence: true
   validates :title, presence: true
   validates :status, presence: true, inclusion: { in: ALLOWED_STATUSES,
                                                   message: "%{value} n'est pas un statut valide" }

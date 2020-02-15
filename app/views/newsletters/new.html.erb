@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Créer un article</h1>
+    <%= simple_form_for @newsletter, url: newsletters_path, method: :post do |a| %>
+      <%= a.input :title, label: "Titre de la newsletter" %>
+      <%= a.input :newsletter_type, label: "Type de newsletter", collection: ['revue de presse'] %>
+      <%= a.submit "Créer" %>
+    <% end %>
+</div>
