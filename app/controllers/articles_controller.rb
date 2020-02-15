@@ -27,19 +27,16 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    articles = Article.all
     @articles = []
-    articles.each do |a|
-      @articles << a if a.status == 'published'
-    end
     if params[:keywords].present?
       sql_keywords = " \
             articles.title @@ :keywords \
             OR articles.body @@ :keywords \
           "
       @articles = Article.where(sql_keywords, keywords: "%#{params[:keywords]}%")
-    else
-      "Aucun article ne correspond à votre recherche"
+      @articles.each do |a|
+        @articles << a if a.status == 'published'
+      end
     end
   end
 

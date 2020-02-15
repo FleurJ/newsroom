@@ -10,6 +10,9 @@
 <% end %>
 
   <br>
+  <% if @articles.empty? %>
+    <p>Il n'y a pas d'article correspondant à votre recherche</p>
+  <% else %>
   <% @articles.each do |article| %>
   <div class="card mb-3">
     <div class="row no-gutters">
@@ -28,5 +31,6 @@
       </div>
       </div>
     </div>
+  <% end %>
   <% end %>
 </div>
