@@ -14,17 +14,21 @@
   <% @articles.each do |article| %>
   <div class="card mb-3">
     <div class="row no-gutters">
+      <div class="col-md-2">
+        <img src="https://image.shutterstock.com/z/stock-vector-speech-bubble-icon-over-blue-circle-and-background-colorful-design-vector-illustration-574733059.jpg" class="card-img" alt="article illustration">
+      </div>
       <div class="col-md-4">
-        <!-- <img src="https://image.shutterstock.com/z/stock-vector-speech-bubble-icon-over-blue-circle-and-background-colorful-design-vector-illustration-574733059.jpg" class="card-img" alt="article illustration"> -->
         <% article.tags.each do |t| %>
               <%= link_to t.name, tag_path(t), class: "btn btn-secondary" %>
           <% end %>
-      </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
-          <p class="card-text"><%= article.body[0..200].html_safe %>...</p>
+<!--           <p class="card-text"><%= article.body[0..200].html_safe %>...</p> -->
           <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date %></small></p>
+          <p class="card-text"><% article.tags.each do |t| %>
+              <a href="#" class="btn btn-info btn-sm"> <%= t.name %> </a>
+          <% end %></p>
         </div>
       </div>
       </div>
