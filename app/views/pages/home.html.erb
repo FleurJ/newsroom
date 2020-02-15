@@ -11,7 +11,7 @@
           <%= link_to tags_path, class: "btn btn-primary btn-lg btn-block home", title:'Thématiques' do %>
           <i class="fas fa-tags fa-fw"></i> Thématiques
           <% end %>
-          <%= link_to "#", class: "btn btn-primary btn-lg btn-block home", title:'Trouver un article' do %>
+          <%= link_to search_path, class: "btn btn-primary btn-lg btn-block home", title:'Trouver un article' do %>
           <i class="fas fa-search fa-fw"></i> Trouver un article
           <% end %>
           <%= link_to new_article_path, class: "btn btn-primary btn-lg btn-block home", title:'Ajouter un article' do %>
@@ -30,5 +30,4 @@
     <%= link_to 'Se connecter', new_user_session_path  %>
   <% end %>
   </div>
-
 </div>

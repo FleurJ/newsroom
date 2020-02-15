@@ -26,6 +26,12 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def search
+    @articles = Article
+    @articles = @articles.by_keywords(params[:keywords]) if params[:keywords].present?
+    @articles = @articles.published_between(params[:start_date], params[:end_date]).published
+  end
+
   def new
     @article = Article.new
     @tags = Tag.all
