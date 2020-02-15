@@ -33,10 +33,12 @@ class ArticlesController < ApplicationController
 
   def create
     articles_generation_params.each do |item|
-      pub_date = adapt_publication_date_scrapping(item[:publication_date])
       a = Article.create(item.merge(user: current_user, status: 'draft'))
-      a.publication_date = pub_date
-      a.save
+      if item[:article_type] == "presse"
+        pub_date = adapt_publication_date_scrapping(item[:publication_date])
+        a.publication_date = pub_date
+        a.save
+      end
     end
     redirect_to draft_path
   end
