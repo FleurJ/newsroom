@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>Trouver un article</h1>
+  <!-- CHAMPS DE RECHERCHE -->
+  <form class="form-inline">
+    <%= simple_form_for search_path, method: :get do |f| %>
+    <%= label_tag "Entre le" %>
+      <%= date_field_tag :start_date,
+        params[:start_date],
+        class: "form-control",
+        label: "Date"
+      %>
+      <%= label_tag " et le" %>
+      <%= date_field_tag :end_date,
+        params[:end_date],
+        class: "form-control"
+      %>
+      <%= text_field_tag :keywords,
+        params[:keywords],
+        class: "form-control",
+        placeholder: "mots-clés" %>
+      <%= submit_tag "Trouver", class: "btn btn-secondary" %>
+    <% end %>
+  </form>
+    <!-- fin champs de recherche -->
+
+
+  <br>
+  <% if @articles.empty? %>
+    <p>Il n'y a pas d'article correspondant à votre recherche</p>
+  <% else %>
+  <% @articles.each do |article| %>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <img src="https://image.shutterstock.com/z/stock-vector-speech-bubble-icon-over-blue-circle-and-background-colorful-design-vector-illustration-574733059.jpg" class="card-img" alt="article illustration">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
+<!--           <p class="card-text"><%= article.body[0..200].html_safe %>...</p> -->
+          <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date %></small></p>
+          <p class="card-text"><% article.tags.each do |t| %>
+              <a href="#" class="btn btn-info btn-sm"> <%= t.name %> </a>
+          <% end %></p>
+        </div>
+      </div>
+      </div>
+    </div>
+  <% end %>
+  <% end %>
+</div>

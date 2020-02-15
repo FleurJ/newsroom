@@ -15,4 +15,16 @@ class Article < ApplicationRecord
                                                   message: "%{value} n'est pas un statut valide" }
   validates :article_type, presence: true, inclusion: { in: ALLOWED_TYPES,
                                                   message: "%{value} n'est pas un type d'article valide" }
+
+  scope :published_between, -> (sd, ed) do
+    where('publication_date BETWEEN :sd AND :ed',
+      sd: sd || Date.parse('0000-01-01'),
+      ed: ed || Date.parse('3000-01-01'))
+  end
+
+  scope :published, -> { where(status: :published) }
+
+  scope :by_keywords, -> (keywords) do
+    where('articles.title @@ :keywords OR articles.body @@ :keywords', keywords: "%#{keywords}%")
+  end
 end
