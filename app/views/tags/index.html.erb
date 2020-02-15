@@ -4,7 +4,7 @@
     <div class="col-12">
       <% @tags.each do |tag| %>
       <div class="btn-tag">
-        <%= tag.name %>
+        <%= link_to tag.name, tag_path(tag) %>
       </div>
       <%= link_to "Modifier", edit_tag_path(tag), class:"btn btn-primary" %>
       <%= link_to "Supprimer", tag_path(tag),

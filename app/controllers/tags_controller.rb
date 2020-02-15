@@ -1,5 +1,14 @@
 class TagsController < ApplicationController
-  before_action :find_tag, only: [:update, :edit, :destroy]
+  before_action :find_tag, only: [:update, :edit, :destroy, :show]
+
+  def show
+    @articles = []
+    articles = @tag.articles
+    articles.each do |a|
+      @articles << a if a.status == 'published'
+    end
+  end
+
   def index
     if authorised_user
       @tags = Tag.all

@@ -8,7 +8,7 @@
       <div class="card-body">
         <p><%= @article.body.html_safe %></p>
         <% @tags.each do |t| %>
-          <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
+          <%= link_to t.name, tag_path(t), class: "btn btn-secondary" %>
       <% end %>
       </div>
       <div class="card-footer text-muted">

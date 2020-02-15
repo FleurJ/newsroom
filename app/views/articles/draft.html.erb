@@ -7,7 +7,7 @@
       <div class="col-md-4">
         <!-- <img src="https://image.shutterstock.com/z/stock-vector-speech-bubble-icon-over-blue-circle-and-background-colorful-design-vector-illustration-574733059.jpg" class="card-img" alt="article illustration"> -->
         <% article.tags.each do |t| %>
-              <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
+              <%= link_to t.name, tag_path(t), class: "btn btn-secondary" %>
           <% end %>
       </div>
       <div class="col-md-8">
