@@ -3,16 +3,16 @@
     <div class="card">
       <div class="card-header">
         <h1> <%= @article.title %></h1>
-        <p><%= @article.source_url.html_safe %> <%= @article.source_name %> <%= @article.publication_date %> </p>
+        <p><%= @article.source_url.html_safe %> <%= @article.source_name %> <%= @article.publication_date.strftime("%d/%m/%Y") %> </p>
       </div>
       <div class="card-body">
         <p><%= @article.body.html_safe %></p>
         <% @tags.each do |t| %>
-          <a href="#" class="btn btn-secondary"> <%= t.name %> </a>
+          <%= link_to t.name, tag_path(t), class: "btn btn-secondary" %>
       <% end %>
       </div>
       <div class="card-footer text-muted">
-        <p><%= @article.created_at %> by <%= @article.user.first_name %> <%=@article.user.name %></p>
+        <p><%= @article.publication_date.strftime("%d/%m/%Y") %> by <%= @article.user.first_name %> <%=@article.user.name %></p>
       </div>
     </div>
     <div class="row">
