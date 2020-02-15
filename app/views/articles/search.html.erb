@@ -1,23 +1,14 @@
 <div class="container">
   <h1>Revue de presse <%= @date %></h1>
-  <%= form_tag articles_path, method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
+  <%= form_tag search_path, method: :get do %>
+  <%= text_field_tag :keywords,
+    params[:keywords],
     class: "form-control",
     placeholder: "mots-clés"
   %>
   <%= submit_tag "Trouver", class: "btn btn-primary" %>
 <% end %>
-    <form class="form-inline">
-      <%= simple_form_for articles_path, method: :get do |f| %>
-      <%= date_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Chercher un article"
-      %>
-      <%= submit_tag "OK", class: "btn btn-secondary" %>
-      <% end %>
-    </form>
+
   <br>
   <% @articles.each do |article| %>
   <div class="card mb-3">
