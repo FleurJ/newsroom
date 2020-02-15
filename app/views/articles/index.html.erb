@@ -11,6 +11,9 @@
       <% end %>
     </form>
   <br>
+  <% if @articles.empty? %>
+  <p>Il n'y a pas (encore) d'article publié à cette date.</p>
+  <% else %>
   <% @articles.each do |article| %>
   <div class="card mb-3">
     <div class="row no-gutters">
@@ -29,5 +32,6 @@
       </div>
       </div>
     </div>
+  <% end %>
   <% end %>
 </div>
