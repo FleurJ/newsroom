@@ -1,0 +1,7 @@
+.card {
+  border: 0px;
+  box-shadow: 2px 2px 6px #DDD;
+  &:hover {
+    box-shadow: 2px 2px 6px #BBB;
+  }
+}
