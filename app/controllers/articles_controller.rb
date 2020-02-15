@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :check_article, only: [:edit, :update, :show, :destroy]
+  before_action :autodate, only: [:index]
   FRENCH_MONTHS = {
     "01": "janvier",
     "02": "février",
@@ -15,6 +16,16 @@ class ArticlesController < ApplicationController
     "12": "décembre"
   }
 
+  def draft
+    articles = Article.all.sort
+    @articles = []
+    articles.each do |a|
+      if current_user == a.user
+        @articles << a if a.status == 'draft'
+      end
+    end
+  end
+
   def new
     @article = Article.new
     @tags = Tag.all
@@ -27,7 +38,7 @@ class ArticlesController < ApplicationController
       a.publication_date = pub_date
       a.save
     end
-    redirect_to articles_path
+    redirect_to draft_path
   end
 
   def edit
@@ -36,7 +47,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article.update!(article_params)
-    redirect_to articles_path
+    redirect_to article_path(@article)
   end
 
   def destroy
@@ -56,10 +67,10 @@ class ArticlesController < ApplicationController
       date_start = DateTime.now.strftime("%Y-%m-%d")
       @date = DateTime.now.strftime("%d") + " " + FRENCH_MONTHS[DateTime.now.strftime("%m").to_sym] + " " + DateTime.now.strftime("%Y")
     end
-    articles = Article.all
+    articles = Article.all.sort
     @articles = []
     articles.each do |a|
-        if a.press_review_date == date_start
+      if a.press_review_date == date_start && a.status == 'published'
         @articles << a
       end
     end
@@ -94,6 +105,10 @@ class ArticlesController < ApplicationController
     return publication_date
   end
 
+  def autodate
+    params[:query] = DateTime.now.strftime("%Y-%m-%d") if params[:query].nil?
+  end
+
   def check_article
     @article = Article.find(params[:id])
   end
@@ -107,7 +122,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :press_review_date  ,:teaser, tag_ids: [])
+    params.require(:article).permit(:title, :publication_date, :source_name, :source_url, :body, :status, :press_review_date, :teaser, :article_type, tag_ids: [])
   end
 
   def belga_article_params

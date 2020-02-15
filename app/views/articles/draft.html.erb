@@ -1,16 +1,6 @@
 <div class="container">
-  <h1>Revue de presse <%= @date %></h1>
-    <form class="form-inline">
-      <%= simple_form_for articles_path, method: :get do |f| %>
-      <%= date_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Chercher un article"
-      %>
-      <%= submit_tag "OK", class: "btn btn-secondary" %>
-      <% end %>
-    </form>
-  <br>
+  <h1>Brouillons</h1>
+  <p>Nombre de brouillons : <%= @articles.count %> </p>
   <% @articles.each do |article| %>
   <div class="card mb-3">
     <div class="row no-gutters">
@@ -25,6 +15,14 @@
           <p class="card-text"><% article.tags.each do |t| %>
               <a href="#" class="btn btn-info btn-sm"> <%= t.name %> </a>
           <% end %></p>
+          <div class="row">
+          <%= link_to "Modifier", edit_article_path(article), class:"btn btn-light" %>
+          <%= button_to "Supprimer", article_path(article),
+                      method: :delete,
+                      data: { confirm: "Veuillez confirmer la suppresion !" },
+                     :id=>"delete", class:"btn btn-light" %>
+          </div>
+
         </div>
       </div>
       </div>

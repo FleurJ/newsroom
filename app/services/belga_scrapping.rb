@@ -7,7 +7,8 @@ class BelgaScrapping
       title: scrap_title(file),
       body: scrap_body(file),
       source_name: "Belga",
-      publication_date: Date.today
+      publication_date: Date.today,
+      article_type: "belga"
     )
   end
 

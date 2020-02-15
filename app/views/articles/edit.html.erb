@@ -1,12 +1,14 @@
-<div>
+<div class="container">
   <h1>Modifier l'article</h1>
     <%= simple_form_for @article do |a| %>
-    <%= a.input :title %>
-    <%= a.input :body %>
-    <%= a.input :source_name %>
-    <%= a.input :source_url %>
-    <%= a.input :publication_date %>
-    <%= a.input :status, label: 'Status', collection: ['draft', 'published'], default: 'draft' %>
+    <%= a.input :title, label: 'Titre' %>
+    <%= a.input :body, label: 'Contenu' %>
+    <%= a.input :source_name, label: 'Nom de la source' %>
+    <%= a.input :source_url, label: 'Addresse de la source' %>
+    <%= a.input :press_review_date, label: 'Date de la revue de presse' %>
+    <%= a.input :publication_date, label: 'Date de publication' %>
+    <%= a.input :status, label: 'Statut', collection: ['draft', 'published'], default: 'draft' %>
+    <%= a.input :article_type, label: "Type d'article", collection: ['belga', 'presse', 'web'] %>
     <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true} %>
     <%= a.submit "Enregistrer" %>
   <% end %>
