@@ -1,8 +1,20 @@
 <div class="container">
   <div class="card">
+    <div class="card-header">
+      Apercu des articles de la newsletter
+    </div>
+    <div class="card-body">
+      <% @newsletter.articles.each do |article|  %>
+        <%= link_to article.title, article_path(article) %>
+        <br><hr>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div class="card">
     <ul class="nav nav-pills card-header-pills">
       <li class="nav-item">
-        <%= link_to " Supprimer une newsletter", newsletter_path, method: :delete, data: { confirm: 'Cette action supprimera la newsletter.', disable_with: 'loading...' }, class: 'nav-link far fa-plus-square'  %>
+        <%= link_to " Supprimer la newsletter", newsletter_path, method: :delete, data: { confirm: 'Cette action supprimera la newsletter.', disable_with: 'loading...' }, class: 'nav-link far fa-plus-square'  %>
       </li>
     </ul>
     <div class="card-header">
@@ -12,13 +24,13 @@
       <div class="form">
         <%= simple_form_for @newsletter, url: newsletter_path(@newsletter), method: :patch do |f| %>
         <%= f.input :title, label: "Titre de la newsletter" %>
-        <%= f.input :newsletter_type, label: "Type de newsletter", collection: ['revue de presse'] %>
+        <%= f.input :press_review_date, label: "date de la revue de presse" %>
         <%= f.input :status, label: 'Statut', collection: ['draft', 'published'] %>
           <%= f.button :submit, value: 'Enregistrer', "data-disable-with" => "Enregistrement...", class: "btn btn-primary" %>
         <% end %>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 

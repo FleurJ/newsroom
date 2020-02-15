@@ -21,7 +21,9 @@ class NewslettersController < ApplicationController
     newsletter = Newsletter.new(newsletter_params)
     newsletter.user = current_user
     newsletter.status = 'draft'
+    newsletter.newsletter_type = 'revue de presse'
     newsletter.save
+    add_articles_to_newsletter(newsletter)
     redirect_to newsletters_path
   end
 
@@ -39,6 +41,11 @@ class NewslettersController < ApplicationController
 
   private
 
+  def add_articles_to_newsletter(newsletter)
+    articles = Article.where(press_review_date: newsletter.press_review_date, status: 'published')
+    newsletter.articles = articles
+  end
+
   def is_admin_or_editor?
     if current_user.role == 'admin' || current_user.role == 'editor'
     else
@@ -47,6 +54,6 @@ class NewslettersController < ApplicationController
   end
 
   def newsletter_params
-    params.require(:newsletter).permit(:title, :status, :newsletter_type)
+    params.require(:newsletter).permit(:title, :status, :press_review_date)
   end
 end

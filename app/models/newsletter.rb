@@ -2,7 +2,7 @@ class Newsletter < ApplicationRecord
   ALLOWED_STATUSES = %w[draft published].freeze
 
   belongs_to :user
-  has_many :newsletter_article
+  has_many :newsletter_article, dependent: :destroy
   has_many :articles, through: :newsletter_article
 
   validates :newsletter_type, presence: true
