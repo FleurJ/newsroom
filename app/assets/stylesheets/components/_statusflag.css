@@ -1,3 +1,11 @@
 .draftflag {
-  background-color: &red;
+  background-color: $yellow;
+  display: inline-block;
+  padding: 4px 16px;
+  color: #fff;
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  right:0;
+  border-radius: 0 0 0 6px;
 }
