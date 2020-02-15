@@ -26,6 +26,15 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def search
+    articles = Article.all
+    @articles = []
+      articles.each do |a|
+    if a.press_review_date == date_start && a.status == 'published'
+      @articles << a
+    end
+  end
+
   def new
     @article = Article.new
     @tags = Tag.all
