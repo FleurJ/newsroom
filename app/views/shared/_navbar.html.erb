@@ -29,6 +29,9 @@
           <%= link_to "Gestion des utilisateurs", users_administration_index_path, class: "dropdown-item" %>
         <% end %>
           <%= link_to "Mes brouillons", draft_path, class: "dropdown-item" %>
+        <% if current_user.role == 'editor' || current_user.role == 'admin' %>
+          <%= link_to "Gestion des newsletters", newsletters_path, class: "dropdown-item" %>
+        <% end %>
           <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
         </div>
       </li>
