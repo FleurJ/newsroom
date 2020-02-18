@@ -2,6 +2,9 @@
   <div class="row">
     <div class="card">
       <div class="card-header">
+        <% if @article.status == "draft" %>
+        <div class="draftflag">Brouillon</div>
+        <% end %>
         <h1> <%= @article.title %></h1>
         <% if current_user.favorites.include? @article %>
           <%= link_to favorite_article_path(@article, type: "unfavorite"), method: :put do %>
