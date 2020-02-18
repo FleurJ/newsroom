@@ -1,0 +1,14 @@
+.navtabs {
+  background-color: #005670;
+  color: #fff;
+  text-align:center;
+}
+
+.navtabs .nav-item .nav-link {
+  color: #fff;
+  text-align: center;
+  font-size: 0.9em;
+  &:hover {
+    // border-bottom: 3px solid #00A5BD;
+  }
+}

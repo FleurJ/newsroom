@@ -14,7 +14,9 @@
   <body>
     <!-- navbar -->
     <%= render 'shared/navbar' if current_user %>
+    <%= render 'shared/navtabs' if current_user %>
     <!-- end of navbar -->
+
 
     <!-- alerts -->
     <p class="notice"><%= notice %></p>
