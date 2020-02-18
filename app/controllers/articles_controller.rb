@@ -24,13 +24,10 @@ class ArticlesController < ApplicationController
     type = params[:type]
     if type == "favorite"
       current_user.favorites << @article
-      redirect_to article_path(@article), notice: "#{@article.title} a été ajouté aux favoris"
     elsif type == "unfavorite"
       current_user.favorites.delete(@article)
-      redirect_to article_path(@article), notice: "#{@article.title} a été enlevé des favoris"
-    else
-      redirect_to article_path(@article), notice: "Rien ne s'est passé."
     end
+    redirect_back(fallback_location: "/")
   end
 
   def draft
