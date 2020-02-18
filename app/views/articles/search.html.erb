@@ -37,7 +37,15 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
-<!--           <p class="card-text"><%= article.body[0..200].html_safe %>...</p> -->
+            <% if current_user.favorites.include? article %>
+            <%= link_to favorite_article_path(article, type: "unfavorite"), method: :put do %>
+              <i class="fas fa-star"></i>
+             <% end %>
+          <% else %>
+              <%= link_to favorite_article_path(article, type: "favorite"), method: :put do %>
+                <i class="far fa-star"></i>
+              <% end %>
+          <% end %>
           <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date %></small></p>
           <p class="card-text"><% article.tags.each do |t| %>
               <a href="#" class="btn btn-info btn-sm"> <%= t.name %> </a>

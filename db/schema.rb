@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_02_15_150738) do
+=======
+ActiveRecord::Schema.define(version: 2020_02_15_151850) do
+>>>>>>> 37359621bf653651fe39566fdad089b038c2b93f
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +73,15 @@ ActiveRecord::Schema.define(version: 2020_02_15_150738) do
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorite_articles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_favorite_articles_on_article_id"
+    t.index ["user_id"], name: "index_favorite_articles_on_user_id"
   end
 
   create_table "newsletter_articles", force: :cascade do |t|
@@ -132,6 +145,8 @@ ActiveRecord::Schema.define(version: 2020_02_15_150738) do
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorite_articles", "articles"
+  add_foreign_key "favorite_articles", "users"
   add_foreign_key "newsletter_articles", "articles"
   add_foreign_key "newsletter_articles", "newsletters"
   add_foreign_key "newsletters", "users"
