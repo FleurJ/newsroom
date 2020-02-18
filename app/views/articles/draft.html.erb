@@ -3,7 +3,9 @@
   <p>Nombre de brouillons : <%= @articles.count %> </p>
   <% @articles.each do |article| %>
   <div class="card mb-3">
-    <div class="draftflag"><%= article.status %></div>
+    <% if article.status == "draft" %>
+    <div class="draftflag">Brouillon</div>
+    <% end %>
     <div class="row no-gutters">
       <div class="col-md-2">
         <img src="https://image.shutterstock.com/z/stock-vector-speech-bubble-icon-over-blue-circle-and-background-colorful-design-vector-illustration-574733059.jpg" class="card-img" alt="article illustration">
