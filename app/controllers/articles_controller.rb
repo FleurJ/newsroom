@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :check_article, only: [:edit, :update, :show, :destroy]
+  before_action :check_article, only: [:edit, :update, :show, :destroy, :favorite]
   before_action :autodate, only: [:index]
   FRENCH_MONTHS = {
     "01": "janvier",
@@ -15,6 +15,23 @@ class ArticlesController < ApplicationController
     "11": "novembre",
     "12": "décembre"
   }
+
+  def favorites
+    @articles = current_user.favorite_articles.map(&:article).sort_by(&:created_at).reverse!
+  end
+
+  def favorite
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @article
+      redirect_to article_path(@article), notice: "#{@article.title} a été ajouté aux favoris"
+    elsif type == "unfavorite"
+      current_user.favorites.delete(@article)
+      redirect_to article_path(@article), notice: "#{@article.title} a été enlevé des favoris"
+    else
+      redirect_to article_path(@article), notice: "Rien ne s'est passé."
+    end
+  end
 
   def draft
     articles = Article.all.sort_by(&:created_at).reverse!
@@ -75,7 +92,13 @@ class ArticlesController < ApplicationController
       date_start = DateTime.now.strftime("%Y-%m-%d")
       @date = DateTime.now.strftime("%d") + " " + FRENCH_MONTHS[DateTime.now.strftime("%m").to_sym] + " " + DateTime.now.strftime("%Y")
     end
-    @articles = Article.all.published.sort_by(&:created_at).reverse!
+    articles = Article.all.sort
+    @articles = []
+    articles.each do |a|
+      if a.press_review_date == date_start && a.status == 'published'
+        @articles << a
+      end
+    end
   end
 
   private

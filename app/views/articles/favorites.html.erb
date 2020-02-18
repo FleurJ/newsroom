@@ -1,18 +1,8 @@
 <div class="container">
-  <h1>Revue de presse <%= @date %></h1>
-    <form class="form-inline">
-      <%= simple_form_for articles_path, method: :get do |f| %>
-      <%= date_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Chercher un article"
-      %>
-      <%= submit_tag "OK", class: "btn btn-secondary" %>
-      <% end %>
-    </form>
-  <br>
-  <% if @articles.empty? %>
-  <p>Il n'y a pas (encore) d'article publié à cette date.</p>
+  <h1>Articles favoris</h1>
+  <p>Nombre de favoris : <%= @articles.count %></p>
+    <% if @articles.empty? %>
+  <p>Il n'y a pas (encore) d'article ajouté aux favoris.</p>
   <% else %>
   <% @articles.each do |article| %>
   <div class="card mb-3">

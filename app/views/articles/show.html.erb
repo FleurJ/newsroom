@@ -6,8 +6,18 @@
         <div class="draftflag">Brouillon</div>
         <% end %>
         <h1> <%= @article.title %></h1>
+        <% if current_user.favorites.include? @article %>
+          <%= link_to favorite_article_path(@article, type: "unfavorite"), method: :put do %>
+            <i class="fas fa-star"></i>
+           <% end %>
+          <% else %>
+            <%= link_to favorite_article_path(@article, type: "favorite"), method: :put do %>
+              <i class="far fa-star"></i>
+            <% end %>
+        <% end %>
         <p><%= @article.source_url.html_safe %> <%= @article.source_name %> <%= @article.publication_date.strftime("%d/%m/%Y") %> </p>
       </div>
+
       <div class="card-body">
         <p><%= @article.body.html_safe %></p>
         <% @tags.each do |t| %>
