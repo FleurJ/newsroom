@@ -14,7 +14,11 @@
   <body>
     <!-- navbar -->
     <%= render 'shared/navbar' if current_user %>
+    <% if params[:controller] != "pages" && params[:action] != "home" %>
+    <%= render 'shared/navtabs' if current_user %>
+    <% end %>
     <!-- end of navbar -->
+
 
     <!-- alerts -->
     <p class="notice"><%= notice %></p>
