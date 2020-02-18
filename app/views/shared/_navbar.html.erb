@@ -25,12 +25,13 @@
       <li class="nav-item dropdown">
         <%= image_tag "user-circle-solid.svg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <% if current_user.role == 'admin' %>
-          <%= link_to "Gestion des utilisateurs", users_administration_index_path, class: "dropdown-item" %>
-        <% end %>
           <%= link_to "Mes brouillons", draft_path, class: "dropdown-item" %>
+          <%= link_to "Mes favoris", favorites_path, class: "dropdown-item" %>
         <% if current_user.role == 'editor' || current_user.role == 'admin' %>
           <%= link_to "Gestion des newsletters", newsletters_path, class: "dropdown-item" %>
+        <% end %>
+        <% if current_user.role == 'admin' %>
+          <%= link_to "Gestion des utilisateurs", users_administration_index_path, class: "dropdown-item" %>
         <% end %>
           <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
         </div>

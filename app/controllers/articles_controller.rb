@@ -42,6 +42,7 @@ class ArticlesController < ApplicationController
 
   def search
     @articles = Article
+    return @articles = @articles.none unless params[:keywords].present?
     @articles = @articles.by_keywords(params[:keywords]) if params[:keywords].present?
     @articles = @articles.published_between(params[:start_date], params[:end_date]).published
   end
