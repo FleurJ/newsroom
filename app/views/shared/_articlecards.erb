@@ -8,7 +8,10 @@
     <div class="row no-gutters">
       <div class="col-md-2">
         <% if article.article_type =="presse" %>
-          <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration">
+        <div class="press-icon">
+          <i class="fas fa-newspaper fa-fw"></i>
+        </div>
+          <!-- <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration"> -->
         <% elsif article.article_type =="belga" %>
           <img src="https://image.shutterstock.com/z/stock-vector-online-reading-news-vector-illustration-of-online-reading-news-using-smartphone-248957971.jpg" class="card-img" alt="article illustration">
         <% else %>
