@@ -20,8 +20,8 @@ class Article < ApplicationRecord
 
   scope :published_between, -> (sd, ed) do
     where('publication_date BETWEEN :sd AND :ed',
-      sd: sd || Date.parse('0000-01-01'),
-      ed: ed || Date.parse('3000-01-01'))
+      sd: sd.present? ? sd : Date.parse('0000-01-01'),
+      ed: ed.present? ? sd : Date.parse('3000-01-01'))
   end
 
   scope :published, -> { where(status: :published) }
