@@ -1,0 +1,43 @@
+<% @articles.each do |article| %>
+  <div class="card mb-3">
+
+    <% if article.status == "draft" %>
+      <div class="draftflag">Brouillon</div>
+    <% end %>
+
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <% if article.article_type =="presse" %>
+          <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration">
+        <% elsif article.article_type =="belga" %>
+          <img src="https://image.shutterstock.com/z/stock-vector-online-reading-news-vector-illustration-of-online-reading-news-using-smartphone-248957971.jpg" class="card-img" alt="article illustration">
+        <% else %>
+          <img src="https://image.shutterstock.com/z/stock-photo-media-journalism-global-daily-news-content-concept-428479336.jpg" class="card-img" alt="article illustration">
+        <% end %>
+      </div>
+
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
+
+          <% if current_user.favorites.include? article %>
+            <%= link_to favorite_article_path(article, type: "unfavorite"), method: :put do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+          <% else %>
+              <%= link_to favorite_article_path(article, type: "favorite"), method: :put do %>
+                <i class="far fa-star"></i>
+              <% end %>
+          <% end %>
+
+          <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date.strftime("%d-%m-%Y") %></small></p>
+          <p class="card-text"><% article.tags.each do |t| %>
+            <%= link_to t.name, tag_path(t), class: "btn btn-info btn-sm" %>
+            <% end %>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
