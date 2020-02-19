@@ -29,6 +29,9 @@ class NewslettersController < ApplicationController
 
   def update
     @newsletter = Newsletter.find(params[:id])
+    if @newsletter.status == "draft" && newsletter_params[:status] == "published"
+      NewsletterMailer.with(newsletter: @newsletter).daily.deliver_now
+    end
     @newsletter.update!(newsletter_params)
     redirect_to newsletters_path
   end
