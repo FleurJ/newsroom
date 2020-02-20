@@ -35,11 +35,10 @@ class UsersAdministrationController < ApplicationController
   private
 
   def redirect_non_admin
-    redirect_to root_path unless current_user.role === "admin"
+    redirect_to root_path unless current_user.role == "admin"
   end
 
   def params_user
     params.require(:user).permit(:name, :first_name, :agora_profil, :role, :status, :email, :password, :password_confirmation)
   end
-
 end

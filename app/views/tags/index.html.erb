@@ -3,14 +3,16 @@
   <div class="row">
     <div class="col-12">
       <% @tags.each do |tag| %>
-      <div class="btn-tag">
-        <%= link_to tag.name, tag_path(tag) %>
-      </div>
-      <%= link_to "Modifier", edit_tag_path(tag), class:"btn btn-primary" %>
-      <%= link_to "Supprimer", tag_path(tag),
-                  method: :delete,
-                  data: { confirm: "Veuillez confirmer la suppression !" },
-                  class:"btn btn-secondary" %>
+        <div class="btn-tag">
+          <%= link_to tag.name, tag_path(tag) %>
+        </div>
+        <% if current_user.role == 'admin' %>
+          <%= link_to "Modifier", edit_tag_path(tag), class:"btn btn-primary" %>
+          <%= link_to "Supprimer", tag_path(tag),
+                      method: :delete,
+                      data: { confirm: "Veuillez confirmer la suppression !" },
+                      class:"btn btn-secondary" %>
+        <% end %>
       <% end %>
     </div>
   </div>
