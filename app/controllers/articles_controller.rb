@@ -69,13 +69,27 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article.update!(article_params)
-    redirect_to article_path(@article)
+    if authorised_user
+      @article.update!(article_params)
+      redirect_to article_path(@article)
+    elsif @article.user == current_user
+      @article.update!(article_params)
+      redirect_to article_path(@article)
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
-    @article.destroy
-    redirect_to articles_path
+    if authorised_user
+      @article.destroy
+      redirect_to articles_path
+    elsif @article.user == current_user
+      @article.update!(article_params)
+      redirect_to article_path(@article)
+    else
+      redirect_to root_path
+    end
   end
 
   def show
@@ -100,6 +114,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def authorised_user
+    return true if current_user.role == 'admin' || current_user.role == 'editor'
+  end
 
   def adapt_publication_date_scrapping(item)
     my_hash = {

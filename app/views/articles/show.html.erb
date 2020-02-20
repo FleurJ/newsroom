@@ -29,12 +29,12 @@
         <h1> <%= @article.title %></h1>
         <div class="rainbow"></div> <!-- affiche la ligne de séparation -->
         <% if @article.article_type == "presse" %>
-        <p><%= @article.source_url.html_safe %> <%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+          <p><%= @article.source_url.html_safe %> <%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
         <% elsif @article.article_type == "belga" %>
-        <p><%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+          <p><%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
         <% else %>
-        <p><%= @article.source_name %>, <%= @article.source_url %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
-     <% end %>
+          <p><%= @article.source_name %>, <%= @article.source_url %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+      <% end %>
       </div>
 
     <!-- === BODY -->
@@ -53,13 +53,17 @@
     </div>
 
     <!-- ACTIONS -->
-    <div class="row article-actions">
-      <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %> &nbsp;
-      <%= button_to "Supprimer", article_path(@article),
-                      method: :delete,
-                      data: { confirm: "Veuillez confirmer la suppresion !" },
-                     :id=>"delete", class:"btn btn-danger" %>
-    </div>
+    <% if @article.user == current_user || current_user.role != "user" %>
+      <div class="row article-actions">
+            <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %> &nbsp;
+            <%= button_to "Supprimer", article_path(@article),
+                            method: :delete,
+                            data: { confirm: "Veuillez confirmer la suppression !" },
+                           :id => "delete", class:"btn btn-danger" %>
+
+      </div>
+    <% end %>
+
   </div>
   </div>
 </div>

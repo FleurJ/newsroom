@@ -22,9 +22,10 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(tag_params)
-    @tag.save
-
+    if authorised_user
+      @tag = Tag.new(tag_params)
+      @tag.save
+    end
     redirect_to tags_path
   end
 
