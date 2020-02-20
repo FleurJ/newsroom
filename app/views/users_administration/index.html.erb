@@ -11,7 +11,9 @@
   <div class="card-body">
     <h5 class="card-title">
       <% @users.each do |user| %>
-          <% if user.name %>
+          <% if user.status != "actif" %>
+          <%= link_to "[INACTIF]#{user.email}", edit_users_administration_path(user)  %>
+          <% elsif user.name != nil && user.name != "" %>
             <%= link_to "#{user.first_name} #{user.name}", edit_users_administration_path(user) %>
           <% else %>
             <%= link_to user.email, edit_users_administration_path(user) %>
