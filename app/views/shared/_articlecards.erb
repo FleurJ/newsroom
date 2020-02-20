@@ -37,18 +37,18 @@
           <div class="action-star">
           <% if current_user.favorites.include? article %>
             <%= link_to favorite_article_path(article, type: "unfavorite"), title:"Retirer des favoris", class: "active-star", method: :put do %>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star fa-fw"></i>
             <% end %>
           <% else %>
               <%= link_to favorite_article_path(article, type: "favorite"), title:"Ajouter aux favoris", method: :put do %>
-                <i class="far fa-star"></i>
+                <i class="far fa-star fa-fw"></i>
               <% end %>
           <% end %>
           </div>
           <% if article.user == current_user %>
           <div class="action-edit">
             <%= link_to edit_article_path(article) do %>
-            <i class="fas fa-edit"></i>
+            <i class="fas fa-edit fa-fw"></i>
             <% end %>
           </div>
             <div class="action-delete">
@@ -56,7 +56,7 @@
                       method: :delete,
                       data: { confirm: "Veuillez confirmer la suppresion !" },
                      :id=>"delete" do %>
-                     <i class="far fa-trash-alt"></i>
+                     <i class="far fa-trash-alt fa-fw"></i>
                      <% end %>
             </div>
             <% end %>

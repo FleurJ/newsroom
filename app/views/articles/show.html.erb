@@ -27,7 +27,7 @@
 
       <!-- === ARTICLE TITLE & SOURCE === -->
         <h1> <%= @article.title %></h1>
-        <div class="rainbow"></div>
+        <div class="rainbow"></div> <!-- affiche la ligne de séparation -->
         <% if @article.article_type == "presse" %>
         <p><%= @article.source_url.html_safe %> <%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
         <% elsif @article.article_type == "belga" %>
@@ -44,16 +44,21 @@
           <%= link_to t.name, tag_path(t), class: "btn btn-secondary" %>
       <% end %>
       </div>
+
+    <!-- ARTICLE FOOTER -->
       <div class="card-footer text-muted">
         <p>Ajouté le <%= @article.publication_date.strftime("%d.%m.%Y") %> par <%= @article.user.first_name %> <%=@article.user.name %></p>
       </div>
+
     </div>
-    <div class="row">
-      <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %>
+
+    <!-- ACTIONS -->
+    <div class="row article-actions">
+      <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %> &nbsp;
       <%= button_to "Supprimer", article_path(@article),
                       method: :delete,
                       data: { confirm: "Veuillez confirmer la suppresion !" },
-                     :id=>"delete", class:"btn btn-primary" %>
+                     :id=>"delete", class:"btn btn-danger" %>
     </div>
   </div>
   </div>

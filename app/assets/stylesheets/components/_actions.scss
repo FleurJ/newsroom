@@ -3,6 +3,11 @@
   text-align: center;
   padding-top: 4px;
 }
+
+.col-md-1.actions {
+  text-align: right;
+}
+
 .action-star a {
   margin: 4px;
   color: $middlegray;
@@ -47,4 +52,9 @@ a.active-star {
   &:hover {
     color: $red;
   }
+}
+
+.article-actions {
+  padding: 20px;
+  margin-bottom: 30px;
 }
