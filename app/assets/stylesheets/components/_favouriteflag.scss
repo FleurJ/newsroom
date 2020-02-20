@@ -1,0 +1,11 @@
+.favourite a {
+  position: absolute;
+  top: 0;
+  right:0;
+  z-index:1;
+  margin: 4px;
+  color: $red;
+  &:hover {
+    color: $red;
+  }
+}
