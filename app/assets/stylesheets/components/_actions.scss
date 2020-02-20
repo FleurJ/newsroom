@@ -1,0 +1,36 @@
+.actions {
+  font-size: 1.2em;
+  text-align: center;
+  padding-top: 4px;
+  margin-left: 2.5em;
+}
+.action-star a {
+  margin: 4px;
+  color: $middlegray;
+  &:hover {
+    color: $yellow;
+  }
+}
+
+a.active-star {
+  color: $yellow;
+  &:hover {
+    color: $red;
+  }
+}
+
+.action-edit a{
+  margin: 4px;
+  color: $middlegray;
+  &:hover {
+    color: $darkblue;
+  }
+}
+
+.action-delete a {
+  margin: 4px;
+  color: $middlegray;
+  &:hover {
+    color: $red;
+  }
+}
