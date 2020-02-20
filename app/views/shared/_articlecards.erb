@@ -5,7 +5,9 @@
       <div class="draftflag">Brouillon</div>
     <% end %>
 
-    <div class="row no-gutters">
+    <div class="row no-gutters justify-content-between">
+
+<!-- ===== IMAGE & DRAFT FLAG ===== -->
       <div class="col-md-2">
         <% if article.article_type =="presse" %>
           <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration">
@@ -16,29 +18,51 @@
         <% end %>
       </div>
 
-      <div class="col-md-10">
-
+<!-- ===== CARD BODY ===== -->
+      <div class="col-md-9">
         <div class="card-body">
           <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
-          <div class="favourite">
-            <% if current_user.favorites.include? article %>
-              <%= link_to favorite_article_path(article, type: "unfavorite"), title:"Retirer des favoris", method: :put do %>
-                <i class="fas fa-star"></i>
-              <% end %>
-            <% else %>
-                <%= link_to favorite_article_path(article, type: "favorite"), title:"Ajouter aux favoris", method: :put do %>
-                  <i class="far fa-star"></i>
-                <% end %>
-            <% end %>
-          </div>
           <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date.strftime("%d.%m.%Y") %></small></p>
         </div>
 
+      <!-- ===== FOOTER ===== -->
         <div class="card-footer"><% article.tags.each do |t| %>
               <%= link_to t.name, tag_path(t), class: "btn btn-tag btn-sm" %>
             <% end %>
         </div>
       </div>
+
+<!-- ===== ACTIONS ===== -->
+        <div class="col-md1 actions">
+          <div class="action-star">
+          <% if current_user.favorites.include? article %>
+            <%= link_to favorite_article_path(article, type: "unfavorite"), title:"Retirer des favoris", class: "active-star", method: :put do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+          <% else %>
+              <%= link_to favorite_article_path(article, type: "favorite"), title:"Ajouter aux favoris", method: :put do %>
+                <i class="far fa-star"></i>
+              <% end %>
+          <% end %>
+          </div>
+          <% if article.user == current_user %>
+          <div class="action-edit">
+            <%= link_to edit_article_path(article) do %>
+            <i class="fas fa-edit"></i>
+            <% end %>
+          </div>
+            <div class="action-delete">
+                    <%= link_to article_path(article),
+                      method: :delete,
+                      data: { confirm: "Veuillez confirmer la suppresion !" },
+                     :id=>"delete" do %>
+                     <i class="far fa-trash-alt"></i>
+                     <% end %>
+            </div>
+            <% end %>
+          </div>
+
+
+      </div>
     </div>
-  </div>
 <% end %>
