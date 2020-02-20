@@ -18,6 +18,7 @@ class UsersAdministrationController < ApplicationController
     user = User.new(params_user)
     if params_user[:password] == params_user[:password_confirmation]
       user.password = params_user[:password_confirmation]
+      user.status = "inactif"
       user.save
       redirect_to users_administration_index_path
     else
