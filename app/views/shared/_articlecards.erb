@@ -1,5 +1,5 @@
 <% @articles.each do |article| %>
-  <div class="card mb-3">
+  <div class="card article-card mb-3">
 
     <% if article.status == "draft" %>
       <div class="draftflag">Brouillon</div>
@@ -8,37 +8,35 @@
     <div class="row no-gutters">
       <div class="col-md-2">
         <% if article.article_type =="presse" %>
-        <div class="press-icon">
-          <i class="fas fa-newspaper fa-fw"></i>
-        </div>
-          <!-- <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration"> -->
+          <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration">
         <% elsif article.article_type =="belga" %>
-          <img src="https://image.shutterstock.com/z/stock-vector-online-reading-news-vector-illustration-of-online-reading-news-using-smartphone-248957971.jpg" class="card-img" alt="article illustration">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvqedoAs34V2r0CRZiXPvwcVgIFHNJDnfBYlMipVE5FKXK5yBW&s" class="card-img" alt="logo belga">
         <% else %>
           <img src="https://image.shutterstock.com/z/stock-photo-media-journalism-global-daily-news-content-concept-428479336.jpg" class="card-img" alt="article illustration">
         <% end %>
       </div>
 
       <div class="col-md-10">
+
         <div class="card-body">
           <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
-
-          <% if current_user.favorites.include? article %>
-            <%= link_to favorite_article_path(article, type: "unfavorite"), method: :put do %>
-              <i class="fas fa-star"></i>
-            <% end %>
-          <% else %>
-              <%= link_to favorite_article_path(article, type: "favorite"), method: :put do %>
-                <i class="far fa-star"></i>
+          <div class="favourite">
+            <% if current_user.favorites.include? article %>
+              <%= link_to favorite_article_path(article, type: "unfavorite"), title:"Retirer des favoris", method: :put do %>
+                <i class="fas fa-star"></i>
               <% end %>
-          <% end %>
-
-          <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date.strftime("%d-%m-%Y") %></small></p>
-          <p class="card-text"><% article.tags.each do |t| %>
-            <%= link_to t.name, tag_path(t), class: "btn btn-info btn-sm" %>
+            <% else %>
+                <%= link_to favorite_article_path(article, type: "favorite"), title:"Ajouter aux favoris", method: :put do %>
+                  <i class="far fa-star"></i>
+                <% end %>
             <% end %>
-          </p>
+          </div>
+          <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date.strftime("%d.%m.%Y") %></small></p>
+        </div>
 
+        <div class="card-footer"><% article.tags.each do |t| %>
+              <%= link_to t.name, tag_path(t), class: "btn btn-tag btn-sm" %>
+            <% end %>
         </div>
       </div>
     </div>
