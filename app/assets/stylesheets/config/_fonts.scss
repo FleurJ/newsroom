@@ -1,9 +1,33 @@
 // Import Google fonts
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
 
+// Import local fonts
+
+@font-face {
+  font-family:'IntroBold';
+  src:font-url('IntroBold.otf');
+}
+@font-face {
+  font-family:'IntroRegular';
+  src:font-url('IntroRegular.otf');
+}
+@font-face {
+  font-family:'IntroSemiBold';
+  src:font-url('IntroSemiBold.otf');
+}
+@font-face {
+  font-family:'IntroSemiBoldCaps';
+  src:font-url('IntroSemiBoldCaps.otf');
+}
+
+@font-face {
+  font-family:'IntroBlackCaps';
+  src:font-url('IntroBlackCaps.otf');
+}
+
 // Define fonts for body and headers
-$body-font: "Arial", "Helvetica", "sans-serif";
-$headers-font: "Raleway", "Helvetica", "sans-serif";
+$body-font: "IntroRegular", "Arial", "sans-serif";
+$headers-font: "IntroSemiBold", "Arial";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

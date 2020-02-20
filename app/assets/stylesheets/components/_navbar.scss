@@ -1,9 +1,10 @@
 .navbar-lewagon {
   background-color: #fff;
   transition: 0.5s background-color ease;  display: flex;
-  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   justify-content: space-between;
   padding: 1.0rem;
+  margin-bottom: 3rem;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -15,11 +16,21 @@
   height: 60px;
 }
 
-.navbar .nav-item {
-  font-size: 1.5em;
+a.dropdown-item:hover {
+  color: $blue;
+  background-color: transparent;
 }
 
-a.dropdown-item:hover {
-  color: #00A5BD;
-  background-color: transparent;
+
+.navbar-light .navbar-nav .nav-link {
+  color: $darkblue;
+  font-size: 1.6em;
+  margin: 0 4px;
+
+  &:hover {
+    color: $blue;
+  }
+  &:active {
+    color: $blue;
+  }
 }
