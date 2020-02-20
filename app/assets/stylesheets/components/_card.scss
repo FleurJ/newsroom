@@ -29,3 +29,18 @@
   position: absolute;
   bottom: 4px;
 }
+
+.article-show .card-header {
+  background-color: white;
+  border: none;
+}
+
+.article-show {
+  border: none;
+  box-shadow: none;
+  padding: 10px 20px;
+}
+
+.article-show .card-footer {
+  background-color: transparent;
+}

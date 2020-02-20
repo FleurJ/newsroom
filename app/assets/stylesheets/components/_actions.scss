@@ -2,8 +2,12 @@
   font-size: 1.2em;
   text-align: center;
   padding-top: 4px;
-  margin-left: 2.5em;
 }
+
+.col-md-1.actions {
+  text-align: right;
+}
+
 .action-star a {
   margin: 4px;
   color: $middlegray;
@@ -11,6 +15,21 @@
     color: $yellow;
   }
 }
+
+.action-star-title a {
+  margin: 4px 0px;
+  color: $yellow;
+  font-size: 1.5em;
+  &:hover {
+    color: $red;
+  }
+}
+
+.action-star-title.col-md-1 {
+  padding-right: 0px;
+  text-align: right;
+}
+
 
 a.active-star {
   color: $yellow;
@@ -33,4 +52,9 @@ a.active-star {
   &:hover {
     color: $red;
   }
+}
+
+.article-actions {
+  padding: 20px;
+  margin-bottom: 30px;
 }
