@@ -1,23 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="card">
+    <div class="col md-11">
+    <div class="card article-show">
       <div class="card-header">
-        <% if @article.status == "draft" %>
-        <div class="draftflag">Brouillon</div>
-        <% end %>
-        <h1> <%= @article.title %></h1>
-        <% if current_user.favorites.include? @article %>
-          <%= link_to favorite_article_path(@article, type: "unfavorite"), method: :put do %>
-            <i class="fas fa-star"></i>
-           <% end %>
-          <% else %>
-            <%= link_to favorite_article_path(@article, type: "favorite"), method: :put do %>
-              <i class="far fa-star"></i>
+        <div class="row justify-content-between">
+        <!-- === BROUILLON === -->
+          <div class="col-md-11">
+            <% if @article.status == "draft" %>
+              <div class="draftflag article-show">Brouillon</div>
             <% end %>
-        <% end %>
-        <p><%= @article.source_url.html_safe %> <%= @article.source_name %> <%= @article.publication_date.strftime("%d/%m/%Y") %> </p>
+          </div>
+
+        <!-- === FAVOURITE FLAG  -->
+           <div class="action-star-title col-md-1">
+            <% if current_user.favorites.include? @article %>
+              <%= link_to favorite_article_path(@article, type: "unfavorite"), method: :put do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+            <% else %>
+              <%= link_to favorite_article_path(@article, type: "favorite"), method: :put do %>
+                <i class="far fa-star"></i>
+              <% end %>
+            <% end %>
+            </div>
+         </div>
+
+      <!-- === ARTICLE TITLE & SOURCE === -->
+        <h1> <%= @article.title %></h1>
+        <div class="rainbow"></div>
+        <% if @article.article_type == "presse" %>
+        <p><%= @article.source_url.html_safe %> <%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+        <% elsif @article.article_type == "belga" %>
+        <p><%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+        <% else %>
+        <p><%= @article.source_name %>, <%= @article.source_url %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+     <% end %>
       </div>
 
+    <!-- === BODY -->
       <div class="card-body">
         <p><%= @article.body.html_safe %></p>
         <% @tags.each do |t| %>
@@ -25,7 +45,7 @@
       <% end %>
       </div>
       <div class="card-footer text-muted">
-        <p><%= @article.publication_date.strftime("%d/%m/%Y") %> by <%= @article.user.first_name %> <%=@article.user.name %></p>
+        <p>Ajouté le <%= @article.publication_date.strftime("%d.%m.%Y") %> par <%= @article.user.first_name %> <%=@article.user.name %></p>
       </div>
     </div>
     <div class="row">
@@ -35,5 +55,6 @@
                       data: { confirm: "Veuillez confirmer la suppresion !" },
                      :id=>"delete", class:"btn btn-primary" %>
     </div>
+  </div>
   </div>
 </div>
