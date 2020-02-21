@@ -10,7 +10,12 @@
     <%= a.input :status, label: 'Statut', collection: ['draft', 'published'], default: 'draft' %>
     <%= a.input :article_type, label: "Type d'article", collection: ['belga', 'presse', 'web'] %>
     <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true} %>
-    <%= a.submit "Enregistrer" %>
+    <%= submit_tag "Enregistrer le brouillon", id: "save_draft" %>
+    <%= submit_tag "Enregistrer et publier", id: "save_published" %>
   <% end %>
+<!--     <div class="row article-actions">
+      <button class="btn btn-secondary save-draft" id="btn-save-draft">Enregistrer le brouillon</button>
+      <button class="btn btn-primary publish" id="btn-publish">Enregistrer et publier</button>
+  </div> -->
 </div>
 

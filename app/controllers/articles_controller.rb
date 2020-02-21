@@ -69,6 +69,11 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    if params[:id] == "save_published"
+      save_pupblished
+    else
+      save_draft
+    end
     @article.update!(article_params)
     redirect_to article_path(@article)
   end
@@ -93,9 +98,7 @@ class ArticlesController < ApplicationController
     articles = Article.all.sort
     @articles = []
     articles.each do |a|
-      if a.press_review_date == date_start && a.status == 'published'
-        @articles << a
-      end
+    @articles << a if a.press_review_date == date_start && a.status == 'published'
     end
   end
 
@@ -163,4 +166,13 @@ class ArticlesController < ApplicationController
 
     return [article_params]
   end
+
+  def save_draft
+    @article.status = "draft"
+  end
+
+  def save_published
+    @article.status = "published"
+  end
+
 end
