@@ -11,7 +11,7 @@ class TagsController < ApplicationController
 
   def index
     if authorised_user
-      @tags = Tag.all
+      @tags = Tag.all.sort_by(&:name)
     else
       @tags = Tag.where(status: "published")
     end
