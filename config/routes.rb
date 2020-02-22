@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/favorites', to: 'articles#favorites'
   get '/draft', to: 'articles#draft'
   get '/search', to: 'articles#search'
+  delete '/delete-drafts', to: 'articles#delete_drafts'
 
   resources :articles do
     put :favorite, on: :member
