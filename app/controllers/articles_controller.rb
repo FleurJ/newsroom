@@ -47,11 +47,17 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = Article
-    return @articles = @articles.none unless params[:keywords].present?
-
-    @articles = @articles.by_keywords(params[:keywords]) if params[:keywords].present?
-    @articles = @articles.published_between(params[:start_date], params[:end_date]).published
+      articles = Article.all
+    if params[:start_date].present? && params[:end_date].present? && params[:keywords].present?
+      articles = articles.by_keywords(params[:keywords])
+      @articles = articles.where(publication_date: params[:start_date]..params[:end_date]).published
+    elsif params[:start_date].present? && params[:end_date].present?
+      @articles = articles.where(publication_date: params[:start_date]..params[:end_date]).published
+    elsif params[:keywords].present?
+      @articles = articles.by_keywords(params[:keywords])
+    else
+      @articles = Article.none
+    end
   end
 
   def new
