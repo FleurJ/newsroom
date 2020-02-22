@@ -67,12 +67,12 @@ class ArticlesController < ApplicationController
         a.publication_date = pub_date
         a.save
         a.status = 'draft'
-        redirect_to draft_path
+        return redirect_to draft_path
       elsif item[:article_type] == 'belga'
         a.status = 'draft'
-        redirect_to draft_path
+        return redirect_to draft_path
       else
-      redirect_to article_path(a)
+        return redirect_to article_path(a)
       end
     end
   end
