@@ -11,7 +11,7 @@ class TagsController < ApplicationController
 
   def index
     if authorised_user
-      @tags = Tag.all
+      @tags = Tag.all.sort_by(&:name)
     else
       @tags = Tag.where(status: "published")
     end
@@ -22,9 +22,10 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(tag_params)
-    @tag.save
-
+    if authorised_user
+      @tag = Tag.new(tag_params)
+      @tag.save
+    end
     redirect_to tags_path
   end
 
