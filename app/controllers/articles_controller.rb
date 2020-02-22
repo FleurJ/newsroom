@@ -107,9 +107,7 @@ class ArticlesController < ApplicationController
     articles = Article.all.sort
     @articles = []
     articles.each do |a|
-      if a.press_review_date == date_start && a.status == 'published'
-        @articles << a
-      end
+    @articles << a if a.press_review_date == date_start && a.status == 'published'
     end
   end
 

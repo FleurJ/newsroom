@@ -4,13 +4,22 @@
     <%= a.input :title, label: 'Titre' %>
     <%= a.input :body, label: 'Contenu' %>
     <%= a.input :source_name, label: 'Nom de la source' %>
-    <%= a.input :source_url, label: 'Addresse de la source' %>
+    <%= a.input :source_url, label: 'Adresse de la source' %>
     <%= a.input :press_review_date, label: 'Date de la revue de presse' %>
     <%= a.input :publication_date, label: 'Date de publication' %>
-    <%= a.input :status, label: 'Statut', collection: ['draft', 'published'], default: 'draft' %>
+    <div class="hidden-field">
+      <%= a.input :status, label: 'Statut', collection: ['draft', 'published'], id: 'status', default: 'draft' %>
+    </div>
     <%= a.input :article_type, label: "Type d'article", collection: ['belga', 'presse', 'web'] %>
     <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true} %>
-    <%= a.submit "Enregistrer" %>
+    <div class="row article-actions">
+      <%= submit_tag "Enregistrer le brouillon", class: "btn btn-primary btn-blue-border", id: "save_draft" %>
+      <%= submit_tag "Enregistrer et publier", class: "btn btn-primary", id: "save_published" %>
+    </div>
   <% end %>
+<!--     <div class="row article-actions">
+      <button class="btn btn-secondary save-draft" id="btn-save-draft">Enregistrer le brouillon</button>
+      <button class="btn btn-primary publish" id="btn-publish">Enregistrer et publier</button>
+  </div> -->
 </div>
-
+<script src="application.js"></script>
