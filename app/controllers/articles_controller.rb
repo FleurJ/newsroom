@@ -66,20 +66,22 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    articles_generation_params.each do |item|
+    articles = articles_generation_params.map do |item|
       a = Article.create(item.merge(user: current_user))
       if item[:article_type] == "presse"
         pub_date = adapt_publication_date_scrapping(item[:publication_date])
         a.publication_date = pub_date
         a.save
         a.status = 'draft'
-        return redirect_to draft_path
       elsif item[:article_type] == 'belga'
         a.status = 'draft'
-        return redirect_to draft_path
-      else
-        return redirect_to article_path(a)
       end
+      a
+    end
+    if articles.length > 1
+      return redirect_to draft_path
+    else
+      return redirect_to article_path(articles.first)
     end
   end
 
