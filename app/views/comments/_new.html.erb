@@ -1,5 +1,6 @@
-<h2>Ajouter un commentaire</h2>
 <%= simple_form_for [article, comment] do |f| %>
-  <%= f.input :body %>
+  <div class="comment-form">
+    <%= f.input :body, placeholder: "Commentaire..." %>
+  </div>
   <%= f.submit "Commenter", class: "btn btn-primary" %>
 <% end %>
