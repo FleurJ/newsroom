@@ -3,6 +3,11 @@ class UserAccountController < ApplicationController
 
   def show
     @user = current_user
+    if @user.subscribed == true
+      @color = "green"
+    else
+      @color = ""
+    end
   end
 
   def edit
