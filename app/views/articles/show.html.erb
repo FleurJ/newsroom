@@ -29,17 +29,17 @@
         <h1> <%= @article.title %></h1>
         <div class="rainbow"></div> <!-- affiche la ligne de séparation -->
         <% if @article.article_type == "presse" %>
-        <p><%= @article.source_url.html_safe %> <%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+          <p><%= @article.source_url.html_safe %> <%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
         <% elsif @article.article_type == "belga" %>
-        <p><%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+          <p><%= @article.source_name %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
         <% else %>
-        <p><%= @article.source_name %>, <%= @article.source_url %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
-     <% end %>
+          <p><%= @article.source_name %>, <%= @article.source_url %>, le <%= @article.publication_date.strftime("%d.%m.%Y") %> </p>
+      <% end %>
       </div>
 
     <!-- === BODY -->
       <div class="card-body">
-        <p><%= @article.body.html_safe %></p>
+        <p><%= simple_format(@article.body.html_safe) %></p>
         <% @tags.each do |t| %>
           <%= link_to t.name, tag_path(t), class: "btn btn-tag" %>
       <% end %>
@@ -53,13 +53,50 @@
     </div>
 
     <!-- ACTIONS -->
-    <div class="row article-actions">
-      <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %> &nbsp;
-      <%= button_to "Supprimer", article_path(@article),
-                      method: :delete,
-                      data: { confirm: "Veuillez confirmer la suppresion !" },
-                     :id=>"delete", class:"btn btn-danger" %>
-    </div>
+    <% if @article.user == current_user || current_user.role != "user" %>
+      <div class="row article-actions">
+            <%= link_to "Modifier", edit_article_path(@article), class:"btn btn-primary" %> &nbsp;
+            <%= button_to "Supprimer", article_path(@article),
+                            method: :delete,
+                            data: { confirm: "Veuillez confirmer la suppression !" },
+                           :id => "delete", class:"btn btn-danger" %>
+
+      </div>
+    <% end %>
+
+    <!-- COMMENTS -->
+    <hr>
+  <div>
+    <% if @comments.empty? %>
+      <p>Aucun commentaire disponible</p>
+    <% else %>
+      <p><%= @comments.count %> commentaire(s)</p>
+        <% @comments.each do |c| %>
+        <li>
+          <%= c.body %>
+          <div class="text-muted">
+          Par <%= c.user.name %>
+          <%= c.user.email %>
+          le <%= c.created_at.strftime("%d.%m.%Y %k:%M") %>
+        </div>
+          <% if @article.user == current_user || current_user.role == 'admin' %>
+          <%= link_to "Effacer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
+          <%= link_to "Modifier", method: :get,  params: { state: "edit" } %>
+          <% end %>
+        </li>
+          <% if @state == "edit" %>
+            <%= simple_form_for([@article, c]) do |f| %>
+              <%= f.input :body %>
+            <%= f.submit "Sauvegarder" %>
+            <% end %>
+          <% end %>
+        <% end %>
+    <% end %>
+      <hr>
+      <%= render "comments/new", article: @article, comment: @article.comments.build %>
+  </div>
+  <br>
+
   </div>
   </div>
 </div>

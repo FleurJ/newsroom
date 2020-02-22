@@ -40,9 +40,16 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def delete_drafts
+    drafts = Article.where(status: "draft", user: current_user)
+    drafts.each(&:destroy)
+    redirect_to draft_path
+  end
+
   def search
     @articles = Article
     return @articles = @articles.none unless params[:keywords].present?
+
     @articles = @articles.by_keywords(params[:keywords]) if params[:keywords].present?
     @articles = @articles.published_between(params[:start_date], params[:end_date]).published
   end
@@ -69,17 +76,33 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article.update!(article_params)
-    redirect_to article_path(@article)
+    if authorised_user
+      @article.update!(article_params)
+      redirect_to article_path(@article)
+    elsif @article.user == current_user
+      @article.update!(article_params)
+      redirect_to article_path(@article)
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
-    @article.destroy
-    redirect_to articles_path
+    if authorised_user
+      @article.destroy
+      redirect_to articles_path
+    elsif @article.user == current_user
+      @article.destroy
+      redirect_to article_path(@article)
+    else
+      redirect_to root_path
+    end
   end
 
   def show
+    @comments = @article.comments
     @tags = @article.tags
+    @state = params[:state]
   end
 
   def index
@@ -93,13 +116,15 @@ class ArticlesController < ApplicationController
     articles = Article.all.sort
     @articles = []
     articles.each do |a|
-      if a.press_review_date == date_start && a.status == 'published'
-        @articles << a
-      end
+    @articles << a if a.press_review_date == date_start && a.status == 'published'
     end
   end
 
   private
+
+  def authorised_user
+    return true if current_user.role == 'admin' || current_user.role == 'editor'
+  end
 
   def adapt_publication_date_scrapping(item)
     my_hash = {

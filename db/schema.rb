@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2020_02_22_102107) do
     t.bigint "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "commentable_id"
+    t.string "commentable_type"
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
