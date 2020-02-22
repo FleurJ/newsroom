@@ -1,11 +1,13 @@
 <div class="container">
   <h1>Brouillons</h1>
   <p>Vous avez <b><%= @articles.count %></b> brouillons en attente de publication.</p>
+  <% if @articles.count > 0 %>
   <div class ="row justify-content-end action-admin">
     <%= button_to "Vider les brouillons", delete_drafts_path,
                 method: :delete,
                 data: { confirm: "ATTENTION, cette action supprimera TOUS vos brouillons, veuillez confirmer !" },
                :id => "delete", class:"btn btn-danger" %>
   </div>
+  <% end %>
   <%= render 'shared/articlecards' %>
 </div>
