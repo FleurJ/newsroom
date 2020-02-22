@@ -31,7 +31,30 @@
       <%= a.input :source_name, label: 'Nom de la source' %>
       <%= a.input :source_url, label: 'Addresse de la source' %>
       <%= a.input :publication_date, label: 'Date de publication' %>
-      <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true}, label: 'Thématiques' %>
+      <!-- Button trigger modal -->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong">
+          Définir les thématiques
+        </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Thématiques</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= a.association :tags, collection: @tags, as: :check_boxes, input_html: { multiple: true}, label: 'Thématiques' %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+      </div>
       <div class="row article-actions">
         <%= submit_tag "Enregistrer le brouillon", class: "btn btn-primary btn-blue-border", id: "save_draft" %>
         <%= submit_tag "Enregistrer et publier", class: "btn btn-primary", id: "save_published" %>
