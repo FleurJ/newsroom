@@ -25,7 +25,7 @@ class BelgaScrapping
     html_doc = Nokogiri::HTML(html_file)
     body = []
     html_doc.search('.body-wrap p').each do |element|
-      body << element.text.strip
+      body << element.text
     end
     return body.join.split('Keywords:')[0]
   end
