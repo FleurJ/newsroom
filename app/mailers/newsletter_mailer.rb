@@ -9,6 +9,6 @@ class NewsletterMailer < ApplicationMailer
     @greeting = "Hi"
     @newsletter = params[:newsletter]
 
-    mail to: User.all.map(&:email), subject: "Newsletter #{@newsletter.press_review_date.to_s}"
+    mail to: User.where(subscribed: true).map(&:email), subject: "Newsletter #{@newsletter.press_review_date.to_s}"
   end
 end
