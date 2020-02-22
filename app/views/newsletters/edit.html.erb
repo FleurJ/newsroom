@@ -24,6 +24,7 @@
       <div class="form">
         <%= simple_form_for @newsletter, url: newsletter_path(@newsletter), method: :patch do |f| %>
         <%= f.input :title, label: "Titre de la newsletter" %>
+        <%= f.input :body, label: "Contenu de la newsletter" %>
         <%= f.input :status, label: 'Statut', collection: ['draft', 'published'] %>
           <%= f.button :submit, value: 'Enregistrer', "data-disable-with" => "Enregistrement...", class: "btn btn-primary" %>
         <% end %>
