@@ -39,7 +39,7 @@
 
     <!-- === BODY -->
       <div class="card-body">
-        <p><%= @article.body.html_safe %></p>
+        <p><%= simple_format(@article.body.html_safe) %></p>
         <% @tags.each do |t| %>
           <%= link_to t.name, tag_path(t), class: "btn btn-tag" %>
       <% end %>
