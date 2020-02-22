@@ -1,0 +1,11 @@
+.comment-form label {
+  display: none;
+}
+
+.comment-form textarea.form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid $middlegray;
+  // box-shadow: inset 2px 2px 4px $middlegray;
+}
