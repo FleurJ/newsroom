@@ -42,15 +42,14 @@ class ArticlesController < ApplicationController
 
   def delete_drafts
     drafts = Article.where(status: "draft", user: current_user)
-    drafts.each do |item|
-      item.destroy
-    end
+    drafts.each(&:destroy)
     redirect_to draft_path
   end
 
   def search
     @articles = Article
     return @articles = @articles.none unless params[:keywords].present?
+
     @articles = @articles.by_keywords(params[:keywords]) if params[:keywords].present?
     @articles = @articles.published_between(params[:start_date], params[:end_date]).published
   end
