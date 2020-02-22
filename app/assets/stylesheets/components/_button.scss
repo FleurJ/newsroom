@@ -4,16 +4,27 @@
 }
 
 .btn-tag {
-  border: 1px solid #005670;
+  border: 1px solid $darkblue;
   padding: 4px 8px;
   margin: 4px;
-  color: #005670;
+  color: $darkblue;
   &:hover {
-    background-color: #005670;
+    background-color: $darkblue;
     color: white;
   }
 }
 
 .save-draft, .publish {
   margin-right: 8px;
+}
+
+.btn-blue-border {
+  border: 1px solid $darkblue;
+  color: #005670;
+  margin-right: 8px;
+  background-color: transparent;
+   &:hover {
+    background-color: $darkblue;
+    color: white;
+  }
 }
