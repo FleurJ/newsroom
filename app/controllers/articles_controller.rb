@@ -92,7 +92,7 @@ class ArticlesController < ApplicationController
       @article.destroy
       redirect_to articles_path
     elsif @article.user == current_user
-      @article.update!(article_params)
+      @article.destroy
       redirect_to article_path(@article)
     else
       redirect_to root_path
@@ -100,7 +100,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @comments = @article.comments
     @tags = @article.tags
+    @state = params[:state]
   end
 
   def index

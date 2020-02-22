@@ -64,6 +64,39 @@
       </div>
     <% end %>
 
+    <!-- COMMENTS -->
+    <hr>
+  <div>
+    <% if @comments.empty? %>
+      <p>Aucun commentaire disponible</p>
+    <% else %>
+      <p><%= @comments.count %> commentaire(s)</p>
+        <% @comments.each do |c| %>
+        <li>
+          <%= c.body %>
+          <div class="text-muted">
+          Par <%= c.user.name %>
+          <%= c.user.email %>
+          le <%= c.created_at.strftime("%d.%m.%Y %k:%M") %>
+        </div>
+          <% if @article.user == current_user || current_user.role == 'admin' %>
+          <%= link_to "Effacer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
+          <%= link_to "Modifier", method: :get,  params: { state: "edit" } %>
+          <% end %>
+        </li>
+          <% if @state == "edit" %>
+            <%= simple_form_for([@article, c]) do |f| %>
+              <%= f.input :body %>
+            <%= f.submit "Sauvegarder" %>
+            <% end %>
+          <% end %>
+        <% end %>
+    <% end %>
+      <hr>
+      <%= render "comments/new", article: @article, comment: @article.comments.build %>
+  </div>
+  <br>
+
   </div>
   </div>
 </div>
