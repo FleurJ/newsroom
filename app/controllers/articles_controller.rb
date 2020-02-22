@@ -40,6 +40,14 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def delete_drafts
+    drafts = Article.where(status: "draft", user: current_user)
+    drafts.each do |item|
+      item.destroy
+    end
+    redirect_to draft_path
+  end
+
   def search
     @articles = Article
     return @articles = @articles.none unless params[:keywords].present?
