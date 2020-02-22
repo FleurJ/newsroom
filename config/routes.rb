@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/search', to: 'articles#search'
   resources :articles do
     put :favorite, on: :member
+    resources :comments
   end
   devise_for :users
   root to: 'pages#home'
