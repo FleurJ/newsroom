@@ -46,8 +46,16 @@ class ArticlesController < ApplicationController
     redirect_to draft_path
   end
 
+  def delete_all
+    if current_user.role == "admin"
+      all = Article.all
+      all.each(&:destroy)
+    end
+    redirect_to allcontent_path
+  end
+
   def search
-      articles = Article.all
+   articles = Article.all
     if params[:start_date].present? && params[:end_date].present? && params[:keywords].present?
       articles = articles.by_keywords(params[:keywords])
       @articles = articles.where(publication_date: params[:start_date]..params[:end_date]).published
@@ -66,20 +74,22 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    articles_generation_params.each do |item|
+    articles = articles_generation_params.map do |item|
       a = Article.create(item.merge(user: current_user))
       if item[:article_type] == "presse"
         pub_date = adapt_publication_date_scrapping(item[:publication_date])
         a.publication_date = pub_date
         a.save
         a.status = 'draft'
-        return redirect_to draft_path
       elsif item[:article_type] == 'belga'
         a.status = 'draft'
-        return redirect_to draft_path
-      else
-        return redirect_to article_path(a)
       end
+      a
+    end
+    if articles.length > 1
+      return redirect_to draft_path
+    else
+      return redirect_to article_path(articles.first)
     end
   end
 
@@ -130,6 +140,15 @@ class ArticlesController < ApplicationController
     articles.each do |a|
     @articles << a if a.press_review_date == date_start && a.status == 'published'
     end
+  end
+
+  def next_article
+    article_id = @articles.params[:id] + 1
+    redirect_to article_path(@articles.params[article_id])
+  end
+
+  def allcontent
+    @content = Article.all if current_user.role == 'admin'
   end
 
   private

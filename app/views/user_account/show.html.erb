@@ -7,8 +7,9 @@
       <p class="card-text">
         <div class="form">
           <%= simple_form_for @user, url: user_account_path, method: :patch do |f| %>
-            <%= f.input :subscribed, label: "Inscription à la newsletters" %>
-
+            <%= f.check_box :subscribed, label: "" %>
+            <span style = "color: <%= @color %>;">Recevoir la revue de presse par email</span>
+            <br>
             <%= f.button :submit, value: 'Mettre à jour', "data-disable-with" => "Enregistrement...", class: "btn btn-primary" %>
           <% end %>
         </div>

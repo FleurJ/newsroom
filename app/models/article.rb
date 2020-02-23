@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   ALLOWED_STATUSES = %w[draft published].freeze
-  ALLOWED_TYPES = %w[belga presse web].freeze
+  ALLOWED_TYPES = %w[belga presse media].freeze
 
   belongs_to :user
   has_many :article_tags, dependent: :destroy

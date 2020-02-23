@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Tous les articles : <%= @content.count %></h1>
+  <div class ="row justify-content-end action-admin">
+    <%= button_to "Tout supprimer", delete_all_path,
+                method: :delete,
+                data: { confirm: "ATTENTION, cette action supprimera TOUS les articles publiés ou non, veuillez confirmer !" },
+               :id => "delete", class:"btn btn-danger" %>
+  </div>
+  <% @content.each do |article| %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= article.status %>
+    </div>
+    <div class="col-md-6">
+      <%= article.title %>
+    </div>
+    <div class="col-md-2">
+      <%= article.user.name %>
+    </div>
+  </div>
+  <% end %>
+</div>

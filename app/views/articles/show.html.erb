@@ -77,18 +77,14 @@
             <%= c.body %>
           </div>
           <div class="card-footer text-muted">
-          Par <%= c.user.name %>
-          <%= c.user.email %>
+          <%= c.user.first_name %> <%= c.user.name %>,
           le <%= c.created_at.strftime("%d.%m.%Y %k:%M") %>
           <% if c.user == current_user || current_user.role == 'admin' %>
-          <%= link_to "Effacer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
           <%= link_to "Modifier", edit_article_comment_path(id: c.id, article_id: @article.id) %>
+          <%= link_to "Supprimer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
           <% end %>
-
         </div>
         </div>
-
-
         <% end %>
     <% end %>
     <hr>
