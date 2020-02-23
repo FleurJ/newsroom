@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :find_article
+  before_action :find_article, only: [:new, :create, :destroy]
   before_action :check_comment, only: [:destroy, :edit, :update]
   def new
     @comment = Comment.new
@@ -18,10 +18,10 @@ class CommentsController < ApplicationController
   def update
     if authorised_user
       @comment.update!(comment_params)
-      redirect_to article_path(@article)
+      redirect_to article_path(@comment.article.id)
     elsif @comment.user == current_user
       @comment.update!(comment_params)
-      redirect_to article_path(@article)
+      redirect_to article_path(@comment.article.id)
     else
       redirect_to root_path
     end
