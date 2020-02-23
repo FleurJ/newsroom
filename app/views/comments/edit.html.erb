@@ -1,0 +1,6 @@
+<div class="container">
+<%= simple_form_for @comment, url: article_comment_path, method: :patch do |f| %>
+  <%= f.input :body %>
+  <%= f.submit "Sauvegarder", class: "btn btn-primary" %>
+<% end %>
+</div>

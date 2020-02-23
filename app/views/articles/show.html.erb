@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row">
-  <!--  <%= link_to "Article suivant >", next_article_path %> -->
     <div class="col md-11">
     <div class="card article-show">
       <div class="card-header">
@@ -66,37 +65,32 @@
     <% end %>
 
     <!-- COMMENTS -->
+    <hr>
   <div>
-    <% if @comments.empty? == false %>
+    <% if @comments.empty? %>
+      <p>Aucun commentaire disponible</p>
+    <% else %>
       <p><%= @comments.count %> commentaire(s)</p>
         <% @comments.each do |c| %>
-        <div class ="card article-show">
-          <p style="padding-left: 16px;"><%= c.body %></p>
-          <hr>
-            <div class="row pl-3">
-              <div class="text-muted">
-              <small>
-                <b><%= c.user.first_name %> <%= c.user.name %></b>, le <%= c.created_at.strftime("%d.%m.%Y %k:%M") %>
-                <% if @article.user == current_user || current_user.role == 'admin' %>
-                  <%= link_to "Modifier", method: :get, params: { state: "edit" } %> -
-                  <%= link_to "Supprimer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
-            </small>
-           </div>
+        <div class="card border-light">
+          <div class="card-body">
+            <%= c.body %>
           </div>
+          <div class="card-footer text-muted">
+          <%= c.user.first_name %> <%= c.user.name %>,
+          le <%= c.created_at.strftime("%d.%m.%Y %k:%M") %>
+          <% if c.user == current_user || current_user.role == 'admin' %>
+          <%= link_to "Modifier", edit_article_comment_path(id: c.id, article_id: @article.id) %>
+          <%= link_to "Supprimer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
           <% end %>
         </div>
-
-          <% if @state == "edit" %>
-            <%= simple_form_for([@article, c]) do |f| %>
-              <%= f.input :body %>
-            <%= f.submit "Sauvegarder" %>
-            <% end %>
-          <% end %>
+        </div>
         <% end %>
     <% end %>
-
+    <hr>
       <%= render "comments/new", article: @article, comment: @article.comments.build %>
   </div>
+  <br>
 
   </div>
   </div>
