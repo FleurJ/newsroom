@@ -10,11 +10,11 @@
 <!-- ===== IMAGE & DRAFT FLAG ===== -->
       <div class="col-md-2">
         <% if article.article_type =="presse" %>
-          <img src="https://image.shutterstock.com/z/stock-photo-article-on-tablet-pc-touchpad-ebook-concept-148427981.jpg" class="card-img" alt="article illustration">
+          <%= image_tag "illu-presse", class:"card-img", alt:"article illustration" %>
         <% elsif article.article_type =="belga" %>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvqedoAs34V2r0CRZiXPvwcVgIFHNJDnfBYlMipVE5FKXK5yBW&s" class="card-img" alt="logo belga">
+          <%= image_tag "illu-belga", class:"card-img", alt:"logo belga" %>
         <% else %>
-          <img src="https://image.shutterstock.com/z/stock-photo-media-journalism-global-daily-news-content-concept-428479336.jpg" class="card-img" alt="article illustration">
+          <%= image_tag "illu-media", class:"card-img", alt:"illustration média" %>
         <% end %>
       </div>
 
