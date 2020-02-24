@@ -135,7 +135,7 @@ class ArticlesController < ApplicationController
       date_start = DateTime.now.strftime("%Y-%m-%d")
       @date = DateTime.now.strftime("%d") + " " + FRENCH_MONTHS[DateTime.now.strftime("%m").to_sym] + " " + DateTime.now.strftime("%Y")
     end
-    articles = Article.all.sort
+    articles = Article.all.sort_by(&:created_at).reverse!
     @articles = []
     articles.each do |a|
     @articles << a if a.press_review_date == date_start && a.status == 'published'
