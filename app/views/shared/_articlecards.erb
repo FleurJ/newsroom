@@ -10,11 +10,11 @@
 <!-- ===== IMAGE & DRAFT FLAG ===== -->
       <div class="col-md-2">
         <% if article.article_type =="presse" %>
-          <%= image_tag "illu-presse", class:"card-img", alt:"article illustration" %>
+          <%= image_tag "illu-presse.png", class:"card-img", alt:"article illustration" %>
         <% elsif article.article_type =="belga" %>
-          <%= image_tag "illu-belga", class:"card-img", alt:"logo belga" %>
+          <%= image_tag "illu-belga.png", class:"card-img", alt:"logo belga" %>
         <% else %>
-          <%= image_tag "illu-media", class:"card-img", alt:"illustration média" %>
+          <%= image_tag "illu-media.png", class:"card-img", alt:"illustration média" %>
         <% end %>
       </div>
 
