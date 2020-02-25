@@ -9,6 +9,7 @@ class Article < ApplicationRecord
   has_many :favorited_by, through: :favorite_articles, source: :user
   has_many :comments, dependent: :destroy
   has_one_attached :image
+  has_many :newsletter_articles, dependent: :destroy
 
   validates :title, presence: true
   validates :body, presence: true
