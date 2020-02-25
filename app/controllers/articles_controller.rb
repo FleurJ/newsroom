@@ -62,7 +62,7 @@ class ArticlesController < ApplicationController
     elsif params[:start_date].present? && params[:end_date].present?
       @articles = articles.where(publication_date: params[:start_date]..params[:end_date]).published
     elsif params[:keywords].present?
-      @articles = articles.by_keywords(params[:keywords])
+      @articles = articles.by_keywords(params[:keywords]).published
     else
       @articles = Article.none
     end
