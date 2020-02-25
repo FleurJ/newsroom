@@ -21,7 +21,7 @@
 <!-- ===== CARD BODY ===== -->
       <div class="col-md-9">
         <div class="card-body">
-          <h5 class="card-title"><%= link_to article.title, article_path(article)%></h5>
+          <h5 class="card-title"><%= link_to article.title[0..115], article_path(article)%></h5>
           <p class="card-text"><small class="text-muted"><%= article.source_name %>, le <%= article.publication_date.strftime("%d.%m.%Y") %></small></p>
         </div>
 
