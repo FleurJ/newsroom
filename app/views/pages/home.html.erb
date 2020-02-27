@@ -1,29 +1,27 @@
-<div class="container">
-  <div class="row">
+<div class="home-background">
+<div class="container container-home">
     <% if current_user %>
-    <div class="card mb-3 text-center mx-auto" style="width: 24rem;">
-      <div class="card-body">
-        <h5 class="card-title">Bonjour <%= current_user.first_name %></i></h5>
-        <p class="card-text">
-          <%= link_to articles_path, class: "btn btn-primary btn-lg btn-block home", title:'Revues de presse' do %>
+    <h1 class="display-3">Bonjour <%= current_user.first_name %></h1>
+    <p class="lead text-shadow mb-5 pb-4"> Que lirez-vous dans Kiosk aujourd'hui ?</p>
+    <div class="row">
+      <div class="col-6">
+        <%= link_to articles_path, class: "btn btn-primary btn-lg btn-block home box-shadow", title:'Revues de presse' do %>
           <i class="fas fa-newspaper fa-fw"></i> Revues de presse
           <% end %>
-          <%= link_to tags_path, class: "btn btn-primary btn-lg btn-block home", title:'Thématiques' do %>
+          <%= link_to tags_path, class: "btn btn-primary btn-lg btn-block home box-shadow", title:'Thématiques' do %>
           <i class="fas fa-tags fa-fw"></i> Thématiques
           <% end %>
-          <%= link_to search_path, class: "btn btn-primary btn-lg btn-block home", title:'Trouver un article' do %>
+      </div>
+            <div class="col-6">
+          <%= link_to search_path, class: "btn btn-primary btn-lg btn-block home box-shadow", title:'Trouver un article' do %>
           <i class="fas fa-search fa-fw"></i> Trouver un article
           <% end %>
-          <%= link_to new_article_path, class: "btn btn-primary btn-lg btn-block home", title:'Ajouter un article' do %>
+          <%= link_to new_article_path, class: "btn btn-primary btn-lg btn-block home box-shadow", title:'Ajouter un article' do %>
           <i class="fas fa-file-medical fa-fw"></i> Ajouter un article
           <% end %>
-<!--          <%= link_to draft_path, class: "btn btn-primary btn-lg btn-block home", title: 'Brouillons' do %>
-          <i class="fas fa-pencil-ruler fa-fw"></i> Brouillons
-          <% end %>
--->
-        </p>
       </div>
-  </div>
+    </div>
+
   <% else %>
   <div class="container">
     <h1>Page d'accueil</h1>
@@ -31,4 +29,6 @@
     <%= link_to 'Se connecter', new_user_session_path  %>
   <% end %>
   </div>
+  </div>
+</div>
 </div>
