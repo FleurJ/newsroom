@@ -1,6 +1,4 @@
-<%= simple_form_for [article, comment] do |f| %>
-  <div class="comment-form">
-    <%= f.input :body, placeholder: "Commentaire..." %>
-  </div>
+<%= simple_form_for([@article, @comment], remote: true) do |f| %>
+    <%= f.input :body, placeholder: "Commentaire...", label: false %>
   <%= f.submit "Commenter", class: "btn btn-primary" %>
 <% end %>
