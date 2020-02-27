@@ -89,7 +89,8 @@ class ArticlesController < ApplicationController
     if articles.length > 1
       return redirect_to draft_path
     else
-      return redirect_to article_path(articles.first)
+      @article = articles.first
+      render controller: "Articles", action: "new"
     end
   end
 
