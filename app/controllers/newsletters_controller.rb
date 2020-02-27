@@ -11,6 +11,7 @@ class NewslettersController < ApplicationController
 
   def new
     @newsletter = Newsletter.new
+    @newsletter.title = "Revue de presse du #{Time.now.strftime("%d/%m/%Y")}"
   end
 
   def edit
