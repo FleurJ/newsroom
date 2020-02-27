@@ -1,3 +1,3 @@
 import "bootstrap";
-import { saveAsDraft } from "./button.js";
-import { saveAndPublish } from "./button.js";
+import { functionBtnDraft } from "./button.js";
+functionBtnDraft();

@@ -2,7 +2,7 @@ class UserAccountController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = current_user
+    @user ||= current_user
     if @user.subscribed == true
       @color = "green"
     else
@@ -15,17 +15,13 @@ class UserAccountController < ApplicationController
   end
 
   def update
-    user = current_user
-    if password_params[:password].nil? == false
-      if password_params[:password].length >= 6
-        if password_params[:password] == password_params[:password_confirmation]
-          user.password = password_params[:password]
-        end
-      end
+    @user = current_user
+    @user.subscribed = params_subscription[:subscribed]
+    if @user.update(password_params)
+      redirect_to user_account_path(current_user)
+    else
+      render action: "show"
     end
-    user.subscribed = params_subscription[:subscribed]
-    user.save
-    redirect_to user_account_path(current_user)
   end
 
   private
@@ -34,7 +30,7 @@ class UserAccountController < ApplicationController
   end
 
   def password_params
-    params.require(:user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:password, :password_confirmation, :reset_password_token)
   end
 
 end
