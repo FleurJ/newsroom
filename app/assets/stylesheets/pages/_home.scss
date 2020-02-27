@@ -1,1 +1,28 @@
 // Specific CSS for your home-page
+.text-shadow {
+  text-shadow: 2px 2px white;
+}
+
+.lead {
+  font-family: "IntroSemiBold";
+  font-size: 2em;
+}
+
+.box-shadow {
+  box-shadow: 3px 3px 6px $gray;
+  margin-bottom: 30px;
+}
+
+.home-background {
+  background-image: url("network.jpg");
+  position: absolute;
+  width:100%;
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
+  z-index: -1;
+}
+
+.container-home {
+  margin-top: 8em;
+}
