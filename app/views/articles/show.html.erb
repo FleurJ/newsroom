@@ -71,24 +71,15 @@
       <p>Aucun commentaire disponible</p>
     <% else %>
       <p><%= @comments.count %> commentaire(s)</p>
-        <% @comments.each do |c| %>
-        <div class="card border-light">
-          <div class="card-body">
-            <%= c.body %>
-          </div>
-          <div class="card-footer text-muted">
-          <%= c.user.first_name %> <%= c.user.name %>,
-          le <%= c.created_at.strftime("%d.%m.%Y %k:%M") %>
-          <% if c.user == current_user || current_user.role == 'admin' %>
-          <%= link_to "Modifier", edit_article_comment_path(id: c.id, article_id: @article.id) %>
-          <%= link_to "Supprimer", article_comment_path(id: c.id, article_id: @article.id), method: :delete %>
-          <% end %>
-        </div>
-        </div>
+
+      <div class="comments-container">
+        <% @comments.each do |comment| %>
+          <%= render 'comments/comment', comment: comment %>
         <% end %>
+      </div>
     <% end %>
     <hr>
-      <%= render "comments/new", article: @article, comment: @article.comments.build %>
+      <%= render "comments/new"%>
   </div>
   <br>
 

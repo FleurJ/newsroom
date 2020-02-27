@@ -1,15 +1,20 @@
 class CommentsController < ApplicationController
   before_action :find_article, only: [:new, :create, :destroy]
   before_action :check_comment, only: [:destroy, :edit, :update]
+
   def new
     @comment = Comment.new
   end
 
   def create
-    @comment = @article.comments.build(comment_params)
+    @comment = @article.comments.new(comment_params)
     @comment.user = current_user
-    @comment.save!
-    redirect_to article_path(@article)
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
+    end
   end
 
   def edit
@@ -46,7 +51,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :article_id)
   end
 
   def find_article

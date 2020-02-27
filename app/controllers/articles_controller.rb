@@ -122,9 +122,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comments = @article.comments
+    @comments = @article.comments.order("created_at ASC")
     @tags = @article.tags
-    @state = params[:state]
+    @comment = @article.comments.new
   end
 
   def index
