@@ -1,5 +1,5 @@
 meta_product_name: "Kiosk"
-meta_title: "Product name - Product tagline"
-meta_description: "Relevant description"
-meta_image: "cover.png" # should exist in `app/assets/images/`
-twitter_account: "@product_twitter_account"   # required for Twitter Cards
+meta_title: "Kiosk - Actualités & ressources  "
+meta_description: "Centre de ressources médiatiques de l'Académie de recherche et d'enseignement supérieur (ARES)"
+meta_image: "kiosk-thumbnail.png" # should exist in `app/assets/images/`
+twitter_account: "@pARESfwb_be"   # required for Twitter Cards
