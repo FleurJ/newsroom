@@ -26,3 +26,8 @@
 .container-home {
   margin-top: 8em;
 }
+
+body {
+            opacity: 0;
+            transition: opacity 1s;
+        }
