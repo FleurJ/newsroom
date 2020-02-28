@@ -1,69 +1,120 @@
 <div class="container">
   <div class="card card-transparent-white">
-
-  <h1>Thématiques</h1>
-
-  <!-- == ADMIN ACTION == -->
-    <% if current_user.role == 'admin' %>
-    <div class ="row justify-content-end action-admin">
-        <%= link_to new_tag_path do %>
-          <i class="fas fa-plus-circle"></i> Ajouter une thématique
-        <% end %>
-    </div>
-    <% end %>
-  <!--  END ADMIN ACTION -->
-
-<!-- === START ITERATION ===-->
-  <% @tags.each do |tag| %>
-    <div class="row tag-row align-items-center justify-content-between">
-
-    <!-- === DISPLAY TAG NAME === -->
-      <div class="col-md-6">
-        <% if tag.status == "draft" %>
-          <div class="tag-draft">
-            <%= link_to tag.name, tag_path(tag) %>
-          </div>
-        <% else %>
-          <b><%= link_to tag.name, tag_path(tag) %></b>
-        <% end %>
+    <div class="row">
+      <div class="col-9">
+        <h1>Thématiques</h1>
       </div>
-    <!-- END TAG NAME -->
-
-    <!-- DISPLAY ARTICLE COUNT -->
-
-    <div class="col-md-3">
-      <%= tag.articles.count %> <% if tag.articles.count > 1 %> articles <% else %> article <% end %>
-    </div>
-
-    <!-- === DISPLAY ACTION ICONS -->
-      <div class="col-md-1">
-        <div class="row">
+      <div class="col-3 justify-content-end align-items-center">
         <% if current_user.role == 'admin' %>
 
-        <div class="action-edit">
-          <%= link_to edit_tag_path(tag) do %>
-          <i class="fas fa-edit fa-fw"></i>
-          <% end %>
-        </div>
-
-        <div class="action-delete">
-          <%= link_to tag_path(tag),
-            method: :delete,
-            data: { confirm: "Veuillez confirmer la suppresion !" },
-           :id=>"delete" do %>
-           <i class="far fa-trash-alt fa-fw"></i>
-           <% end %>
-        </div>
+        <!-- === Button trigger modal === -->
+        <button type="button" class="btn btn-info mx-0" data-toggle="modal" data-target="#exampleModalLong">
+          Gérer les thématiques
+        </button>
 
         <% end %>
-
-        </div>
       </div>
-      <!-- END ACTION ICONS -->
 
     </div>
-  <% end %>
-<!-- END ITERATION -->
-</div>
 
+     <hr>
+
+        <!-- === MODAL === -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                h5 class="modal-title" id="exampleModalLongTitle">Gérer les thématiques</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+ <!-- ????? -->    </div>
+
+        <div class="modal-body">
+
+        <!-- == ADMIN ACTION == -->
+        <div class ="row justify-content-end action-admin">
+          <%= link_to new_tag_path do %>
+          <i class="fas fa-plus-circle"></i> Ajouter une thématique
+          <% end %>
+        </div>
+        <!--  END ADMIN ACTION -->
+
+        <!-- === START ITERATION ===-->
+        <% @tags.each do |tag| %>
+          <div class="row tag-row align-items-center justify-content-between">
+
+            <!-- === DISPLAY TAG NAME === -->
+            <div class="col-md-6">
+              <% if tag.status == "draft" %>
+                <div class="tag-draft">
+                  <%= link_to tag.name, tag_path(tag) %>
+                </div>
+              <% else %>
+                <b><%= link_to tag.name, tag_path(tag) %></b>
+              <% end %>
+            </div>
+            <!-- END TAG NAME -->
+
+            <!-- DISPLAY ARTICLE COUNT -->
+
+            <div class="col-md-3">
+              <%= tag.articles.count %> <% if tag.articles.count > 1 %> articles <% else %> article <% end %>
+            </div>
+
+            <!-- === DISPLAY ACTION ICONS -->
+            <div class="col-md-1">
+              <div class="row">
+              <% if current_user.role == 'admin' %>
+
+              <div class="action-edit">
+                <%= link_to edit_tag_path(tag) do %>
+                <i class="fas fa-edit fa-fw"></i>
+                <% end %>
+              </div>
+
+              <div class="action-delete">
+                <%= link_to tag_path(tag),
+                  method: :delete,
+                  data: { confirm: "Veuillez confirmer la suppresion !" },
+                 :id=>"delete" do %>
+                 <i class="far fa-trash-alt fa-fw"></i>
+                 <% end %>
+              </div>
+
+              <% end %>
+
+              </div>
+            </div>
+            <!-- END ACTION ICONS -->
+
+          </div>
+          <% end %>
+          <!-- END ITERATION -->
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+        </div>
+      </div>
+    </div>
+<!-- === END MODAL === -->
+
+<!-- === START GRID === -->
+<div class="row align-content-between align-items-center">
+  <% @tags.each do |tag| %>
+    <% if tag.articles.count > 0 %>
+      <div class="card article-card text-center mb-3 mr-3" style="width: 23%;">
+        <div class="card-body">
+          <h5><%= link_to tag.name, tag_path(tag) %>
+        </div>
+      <div class="text-muted">
+        <%= tag.articles.count %> <% if tag.articles.count > 1 %> articles <% else %> article <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
 </div>
