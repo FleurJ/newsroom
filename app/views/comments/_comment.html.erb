@@ -7,9 +7,7 @@
           le <%= comment.created_at.strftime("%d.%m.%Y %k:%M") %>
           <% if comment.user == current_user || current_user.role == 'admin' %>
             <%= link_to "Modifier", edit_article_comment_path(id: comment.id, article_id: @article.id)%>
-            <div id='<%= dom_id(comment) %>'>
-              <%= link_to "Supprimer", article_comment_path(id: comment.id, article_id: @article.id), method: :delete, data: { confirm: "Veuillez confirmer la suppression !"}, remote: true%>
-            </div>
+              <%= link_to "Supprimer", article_comment_path(id: comment.id, article_id: @article.id), method: :delete, data: { confirm: "Veuillez confirmer la suppression !"}%>
             <% end %>
   </div>
 </div>
