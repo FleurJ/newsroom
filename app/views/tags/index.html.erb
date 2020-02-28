@@ -7,7 +7,7 @@
       <div class="col-3 justify-content-end align-items-center">
         <% if current_user.role == 'admin' %>
           <!-- === Button trigger modal === -->
-          <button type="button" class="btn btn-info mx-0" data-toggle="modal" data-target="#exampleModalLong">
+          <button type="button" class="btn btn-info mx-0" data-toggle="modal" data-target="#gestionTags">
           Gérer les thématiques
         </button>
         <% end %>
@@ -20,7 +20,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Gérer les thématiques</h5>
+            <h5 class="modal-title" id="gestionTagsTitle">Gérer les thématiques</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
