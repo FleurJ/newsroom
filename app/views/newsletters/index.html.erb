@@ -1,17 +1,20 @@
 <div class="container">
-  <div class="card">
-    <ul class="nav nav-pills card-header-pills">
-      <li class="nav-item">
-        <%= link_to " Créer une newsletter", new_newsletter_path, class: 'nav-link far fa-plus-square'  %>
-      </li>
-    </ul>
-  <div class="card-header">
-    Gestion des newsletters
-  </div>
+  <h1>Gestion des newsletters</h1>
+  <div class="card article-show">
+      <div class ="row justify-content-end action-admin">
+            <%= link_to new_newsletter_path do %>
+            <i class="fas fa-plus-circle"></i> Ajouter une newsletter
+            <% end %>
+          </div>
   <div class="card-body">
     <h5 class="card-title">
       <% @newsletters.each do |newsletter| %> <!--  <<<<= TO DO ORDER -->
-        <%= link_to "[#{newsletter.status.upcase}] #{newsletter.title}", edit_newsletter_path(newsletter) %>
+        <% if newsletter.status == 'draft' %>
+          <i class="far fa-paper-plane"></i> &nbsp;
+          <% else %>
+          <i class="fas fa-paper-plane"></i> &nbsp;
+          <% end %>
+        <%= link_to "#{newsletter.title}", edit_newsletter_path(newsletter) %>
         <hr>
       <% end %>
       </h5>
