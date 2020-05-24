@@ -1,4 +1,9 @@
 "https://{default}/":
+    # Here the default route goes to an HTTP endpoint defined in our application.
+    # 'app' is the name of the application as defined in your .platform.app.yaml file.
     type: upstream
-    # the first part should be your project name
-    upstream: "a6e72znasnmqc:http"
+    upstream: "app:http"
+"http://www.{default}/":
+    # set a redirect route from www to the naked domain
+    type: redirect
+    to: "https://{default}/"
