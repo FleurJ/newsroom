@@ -1,4 +1,4 @@
 "https://{default}/":
     type: upstream
     # the first part should be your project name
-    upstream: "ARES Kiosk:http"
+    upstream: "a6e72znasnmqc:http"
