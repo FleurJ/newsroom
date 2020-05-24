@@ -33,3 +33,7 @@ end
 gem 'devise'
 gem 'cloudinary', '~> 1.12.0'
 gem 'omniauth'
+
+group :production do
+  gem 'unicorn'
+end
